@@ -7,10 +7,10 @@ assignees: ''
 
 ---
 
-#Story
+# Story
 ---
 
-#Acceptance Criteria
+# Acceptance Criteria
 ---
 
 ***Given***
