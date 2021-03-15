@@ -1,4 +1,10 @@
 {
-    "users": [],
-    "routes": []
+  "users": [
+    {
+      "email": "test@test.com",
+      "name": "test user",
+      "id": 1
+    }
+  ],
+  "routes": []
 }
