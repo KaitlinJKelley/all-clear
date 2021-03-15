@@ -3,6 +3,7 @@ import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import { userStorageKey } from "./auth/authSettings"
 import { RoutePage } from "./routes/RoutePage"
+import { RouteProvider } from "./routes/RouteProvider"
 // debugger
 export const Checkpoint = () => {
   return (
@@ -11,7 +12,9 @@ export const Checkpoint = () => {
         if (sessionStorage.getItem(userStorageKey)) {
           return (
             <>
+            <RouteProvider>
               <RoutePage />
+            </RouteProvider>
             </>
           )
         } else {

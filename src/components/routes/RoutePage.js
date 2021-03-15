@@ -1,6 +1,17 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
+import { RouteContext } from "./RouteProvider"
 
 export const RoutePage = () => {
+
+    const {getLatLong} = useContext(RouteContext)
+
+    
+    useEffect(() => {
+        // getLatLong("1320 Blue Ridge Circle mobile al 36695")
+        
+    }, [])
+
+
     return (
         <>
             <h1>Checkpoint</h1>
@@ -23,11 +34,11 @@ export const RoutePage = () => {
                         </fieldset>
 
                         <fieldset>
-                            <label htmlFor="origin__city">City</label>
-                            <input type="text" name="origin__city" id="" required></input>
+                            <label htmlFor="origin__cityStateZip">City, State Zip</label>
+                            <input type="text" name="origin__cityStateZip" id="" required></input>
                         </fieldset>
 
-                        <fieldset>
+                        {/* <fieldset>
                             <label htmlFor="origin__state">State</label>
                             <input type="text" name="origin__state" id="" required></input>
                         </fieldset>
@@ -35,7 +46,7 @@ export const RoutePage = () => {
                         <fieldset>
                             <label htmlFor="origin__zip">Zip Code</label>
                             <input type="text" name="origin__zip" id="" required></input>
-                        </fieldset>
+                        </fieldset> */}
                     </form>
 
                     <form className="newRoute__forms--destination">
@@ -46,11 +57,11 @@ export const RoutePage = () => {
                         </fieldset>
 
                         <fieldset>
-                            <label htmlFor="destination__city">City</label>
-                            <input type="text" name="destination__city" id="" required></input>
+                            <label htmlFor="destination__cityStateZip">City, State Zip</label>
+                            <input type="text" name="destination__cityStateZip" id="" required></input>
                         </fieldset>
 
-                        <fieldset>
+                        {/* <fieldset>
                             <label htmlFor="destination__state">State</label>
                             <input type="text" name="destination__state" id="" required></input>
                         </fieldset>
@@ -58,7 +69,7 @@ export const RoutePage = () => {
                         <fieldset>
                             <label htmlFor="destination__zip">Zip Code</label>
                             <input type="text" name="destination__zip" id="" required></input>
-                        </fieldset>
+                        </fieldset> */}
                     </form>
                 </div>
                 <div className="newRoute__path">
