@@ -18,14 +18,25 @@ export const RouteProvider = (props) => {
     }
 
     const addNewRoute = routeObj => {
-        return fetch (`http://localhost:8088/routes`), {
+        return fetch (`http://localhost:8088/routes`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(routeObj)
-        }
+        })
     }
+
+    // const addNewsArticle = (articleObj) => {
+    //     return fetch("http://localhost:8088/articles", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(articleObj)
+    //     })
+    //     .then(getNewsArticles)
+    // }
     
 
     return (
