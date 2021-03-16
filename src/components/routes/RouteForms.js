@@ -6,7 +6,7 @@ import { RouteContext } from "./RouteProvider"
 
 export const RouteForms = () => {
     // imports functions to be used in this component
-    const { getLatLong, getDirections, addNewRoute } = useContext(RouteContext)
+    const { getLatLong, getDirections, addNewRoute, getRoutes } = useContext(RouteContext)
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
@@ -96,6 +96,10 @@ export const RouteForms = () => {
         }
 
     }, [options])
+
+    useEffect(() => {
+        getRoutes()
+    }, [path])
 
     return (
         <>

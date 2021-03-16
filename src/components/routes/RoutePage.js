@@ -1,6 +1,7 @@
 // Responsible for rendering user's Saved Routes and Route Form
 import React, { useContext, useEffect, useState } from "react"
 import { currentUserId } from "../auth/authSettings"
+import { RouteCard } from "./RouteCard"
 import { RouteForms } from "./RouteForms"
 import { RouteContext } from "./RouteProvider"
 
@@ -12,11 +13,15 @@ export const RoutePage = () => {
 
     useEffect(() => {
         getRoutes()
-        .then(() => {
-            const filteredRoutes = routes.filter(route => route.userId === currentUserId)
-            setUserRoutes(filteredRoutes)
-        })
     }, [])
+
+    useEffect(() => {
+        // debugger
+        // filter the array containing all route objects and return and array containing only the objects for the currently logged in user
+        const filteredRoutes = routes.filter(route => route.userId === currentUserId)
+        // set userRoutes equal to filteredRoutes
+        setUserRoutes(filteredRoutes)
+    }, [routes])
 
     return (
         <>
@@ -25,9 +30,14 @@ export const RoutePage = () => {
             <section className="savedRoutes">
                 <h2>Saved Routes</h2>
                 <div className="savedRoutes__cards">
-                    Looks like you don't have any saved routes! Complete the form below to add a new route
-                {/* Call RouteCard to render each route to DOM for the currently logged in user*/}
-                
+                    {userRoutes.length === 0 ? "Looks like you don't have any saved routes! Complete the form below to add a new route" :
+                        // Iterate each object in the userRoutes array
+                        userRoutes.map(route => {
+                            // on each object iteration invoke RouteCard component and pass routeName as props
+                            return <RouteCard key={route.id} routeName={route.name} />
+                        })
+                    }
+
                 </div>
             </section>
             <div className="newRoute">
