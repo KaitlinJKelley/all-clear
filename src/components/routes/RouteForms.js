@@ -5,7 +5,7 @@ import { RouteContext } from "./RouteProvider"
 
 export const RouteForms = () => {
     // imports functions to be used in this component
-    const { getLatLong, getDirections } = useContext(RouteContext)
+    const { getLatLong, getDirections, addNewRoute } = useContext(RouteContext)
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
@@ -46,7 +46,9 @@ export const RouteForms = () => {
 
     }
 
-    const handleSaveClick = (event) => { }
+    const handleSaveClick = () => {
+
+    }
 
     useEffect(() => {
         // Every time setOptions is called to change the options object's value
@@ -117,7 +119,7 @@ export const RouteForms = () => {
                 {path.join(" to ")}
             </div>
             <button className="btn--saveRoute" type="submit"
-            disabled={!isComplete}>Save Route</button>
+            disabled={!isComplete} onClick={() => handleSaveClick()}>Save Route</button>
         </>
     )
 }

@@ -15,14 +15,22 @@ export const RouteProvider = (props) => {
     const getDirections = (originObj, destinationObj) => {
         return fetch (`https://router.hereapi.com/v8/routes?transportMode=car&origin=${Object.values(originObj)}&destination=${Object.values(destinationObj)}&return=polyline,turnbyturnactions&apikey=${process.env.REACT_APP_API}`)
         .then(res => res.json())
-
     }
 
+    const addNewRoute = routeObj => {
+        return fetch (`http://localhost:8088/routes`), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(routeObj)
+        }
+    }
     
 
     return (
         <RouteContext.Provider value={{
-            getLatLong, getDirections
+            getLatLong, getDirections, addNewRoute
         }}>
             {props.children}
         </RouteContext.Provider>
