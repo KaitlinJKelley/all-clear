@@ -8,18 +8,18 @@ import { RouteContext } from "./RouteProvider"
 export const RoutePage = () => {
     // imports routes state variable and getRoutes function
     const { routes, getRoutes } = useContext(RouteContext)
-
+    // Declares state variable to be mapped once useEffect runs
     const [userRoutes, setUserRoutes] = useState([])
 
     useEffect(() => {
+        // gets and sets all routes
         getRoutes()
     }, [])
 
     useEffect(() => {
-        // debugger
-        // filter the array containing all route objects and return and array containing only the objects for the currently logged in user
+        // filters the array containing all route objects and return and array containing only the objects for the currently logged in user
         const filteredRoutes = routes.filter(route => route.userId === currentUserId)
-        // set userRoutes equal to filteredRoutes
+        // sets userRoutes equal to filteredRoutes
         setUserRoutes(filteredRoutes)
     }, [routes])
 
