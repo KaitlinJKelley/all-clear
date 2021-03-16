@@ -1,6 +1,10 @@
-import React from "react"
+// Responsible for rendering user's Saved Routes and Route Form
+import React, { useContext, useEffect } from "react"
+import { RouteForms } from "./RouteForms"
+import { RouteContext } from "./RouteProvider"
 
 export const RoutePage = () => {
+
     return (
         <>
             <h1>Checkpoint</h1>
@@ -15,56 +19,9 @@ export const RoutePage = () => {
             <div className="newRoute">
                 <h2>New Route</h2>
                 <div className="newRoute__forms">
-                    <form className="newRoute__forms--origin">
-                        <legend>Origin</legend>
-                        <fieldset>
-                            <label htmlFor="origin__street">Street</label>
-                            <input type="text" name="origin__street" id="" required></input>
-                        </fieldset>
-
-                        <fieldset>
-                            <label htmlFor="origin__city">City</label>
-                            <input type="text" name="origin__city" id="" required></input>
-                        </fieldset>
-
-                        <fieldset>
-                            <label htmlFor="origin__state">State</label>
-                            <input type="text" name="origin__state" id="" required></input>
-                        </fieldset>
-
-                        <fieldset>
-                            <label htmlFor="origin__zip">Zip Code</label>
-                            <input type="text" name="origin__zip" id="" required></input>
-                        </fieldset>
-                    </form>
-
-                    <form className="newRoute__forms--destination">
-                    <legend>Destination</legend>
-                        <fieldset>
-                            <label htmlFor="destination__street">Street</label>
-                            <input type="text" name="destination__street" id="" required></input>
-                        </fieldset>
-
-                        <fieldset>
-                            <label htmlFor="destination__city">City</label>
-                            <input type="text" name="destination__city" id="" required></input>
-                        </fieldset>
-
-                        <fieldset>
-                            <label htmlFor="destination__state">State</label>
-                            <input type="text" name="destination__state" id="" required></input>
-                        </fieldset>
-
-                        <fieldset>
-                            <label htmlFor="destination__zip">Zip Code</label>
-                            <input type="text" name="destination__zip" id="" required></input>
-                        </fieldset>
-                    </form>
+                    {/* Invoke RouteForm coponent to render New Route form to DOM */}
+                    <RouteForms />
                 </div>
-                <div className="newRoute__path">
-                    {/* Invoke function to render turnbyturn direction streetnames to DOM */}
-                </div>
-                <button className="btn--saveRoute">Save Route</button>
             </div>
         </>
     )
