@@ -1,7 +1,7 @@
 // Reponsible for Route Form layout and state
 import React, { useContext, useState, useEffect } from "react"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
-import { userStorageKey } from "../auth/authSettings"
+import { currentUser, currentUserId, userStorageKey } from "../auth/authSettings"
 import { RouteContext } from "./RouteProvider"
 
 export const RouteForms = () => {
@@ -69,7 +69,7 @@ export const RouteForms = () => {
             name: options.name,
             origin: options.originStreet + " " + options.originCSZ,
             destination: options.destinationStreet + " " + options.destinationCSZ,
-            userId: parseInt(sessionStorage.getItem(userStorageKey))
+            userId: currentUserId
         }
         // change route state to match newRoute
         setRoute(newRoute)
