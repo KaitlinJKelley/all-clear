@@ -27,16 +27,16 @@ export const RouteProvider = (props) => {
             body: JSON.stringify(routeObj)
         })
     }
-
+    //set routes state variable equal to an array of all routes 
     const getRoutes = () => {
-        return ("http://localhost:8088/routes")
+        return fetch ("http://localhost:8088/routes")
         .then(res => res.json())
         .then(routes => setRoutes(routes))
     }
 
     return (
         <RouteContext.Provider value={{
-            getLatLong, getDirections, addNewRoute, getRoutes
+            getLatLong, getDirections, addNewRoute, getRoutes, routes
         }}>
             {props.children}
         </RouteContext.Provider>

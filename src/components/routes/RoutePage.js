@@ -1,14 +1,21 @@
 // Responsible for rendering user's Saved Routes and Route Form
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { currentUserId } from "../auth/authSettings"
 import { RouteForms } from "./RouteForms"
 import { RouteContext } from "./RouteProvider"
 
 export const RoutePage = () => {
+    // imports routes state variable and getRoutes function
     const { routes, getRoutes } = useContext(RouteContext)
+
+    const [userRoutes, setUserRoutes] = useState([])
 
     useEffect(() => {
         getRoutes()
+        .then(() => {
+            const filteredRoutes = routes.filter(route => route.userId === currentUserId)
+            setUserRoutes(filteredRoutes)
+        })
     }, [])
 
     return (
