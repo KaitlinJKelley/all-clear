@@ -1,3 +1,4 @@
+// Responsible for rendering user's Saved Routes and Route Form
 import React, { useContext, useEffect } from "react"
 import { RouteForms } from "./RouteForms"
 import { RouteContext } from "./RouteProvider"
@@ -18,10 +19,9 @@ export const RoutePage = () => {
             <div className="newRoute">
                 <h2>New Route</h2>
                 <div className="newRoute__forms">
+                    {/* Invoke RouteForm coponent to render New Route form to DOM */}
                     <RouteForms />
                 </div>
-                
-               
             </div>
         </>
     )
