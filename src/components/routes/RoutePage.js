@@ -12,8 +12,8 @@ export const RoutePage = () => {
             <section className="savedRoutes">
                 <h2>Saved Routes</h2>
                 <div className="savedRoutes__cards">
-                    No saved routes
-                {/* Call RouteCard to render each route to DOM */}
+                    Looks like you don't have any saved routes! Complete the form below to add a new route
+                {/* Call RouteCard to render each route to DOM for the currently logged in user*/}
                 </div>
             </section>
             <div className="newRoute">
