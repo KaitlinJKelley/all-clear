@@ -1,11 +1,12 @@
 // Reponsible for Route Form layout and state
 import React, { useContext, useState, useEffect } from "react"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
+import { userStorageKey } from "../auth/authSettings"
 import { RouteContext } from "./RouteProvider"
 
 export const RouteForms = () => {
     // imports functions to be used in this component
-    const { getLatLong, getDirections } = useContext(RouteContext)
+    const { getLatLong, getDirections, addNewRoute } = useContext(RouteContext)
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
@@ -19,6 +20,7 @@ export const RouteForms = () => {
     })
     // Because an input field can't be matched to a route key, this state variable will be used until all fields are ready to setRoute
     const [options, setOptions] = useState({
+        name: "",
         originStreet: "",
         originCSZ: "",
         destinationStreet: "",
@@ -46,16 +48,28 @@ export const RouteForms = () => {
 
     }
 
-    const handleSaveClick = (event) => { }
+    const handleSaveClick = () => {
+        // debugger
+       addNewRoute(route)
+       setOptions({
+            name: "",
+            originStreet: "",
+            originCSZ: "",
+            destinationStreet: "",
+            destinationCSZ: ""
+       })
+       setPath([])
+       setIsComplete(false)
+    }
 
     useEffect(() => {
         // Every time setOptions is called to change the options object's value
         // Decalre a newRoute variable that mirrors route variable layout with concatenated values
         const newRoute = {
-            name: "",
-            origin: options.originStreet + options.originCSZ,
-            destination: options.destinationStreet + options.destinationCSZ,
-            userId: 0
+            name: options.name,
+            origin: options.originStreet + " " + options.originCSZ,
+            destination: options.destinationStreet + " " + options.destinationCSZ,
+            userId: parseInt(sessionStorage.getItem(userStorageKey))
         }
         // change route state to match newRoute
         setRoute(newRoute)
@@ -86,6 +100,10 @@ export const RouteForms = () => {
     return (
         <>
             <form className="newRoute__forms--origin">
+            <fieldset>
+                    <label htmlFor="name">Route Name (ex. Home to Work)</label>
+                    <input type="text" name="name" value={options.name} onChange={event => handleInputChange(event)} required></input>
+                </fieldset>
                 <legend>Origin</legend>
                 <fieldset>
                     <label htmlFor="originStreet">Street</label>
@@ -117,7 +135,7 @@ export const RouteForms = () => {
                 {path.join(" to ")}
             </div>
             <button className="btn--saveRoute" type="submit"
-            disabled={!isComplete}>Save Route</button>
+            disabled={!isComplete} onClick={() => handleSaveClick()}>Save Route</button>
         </>
     )
 }
