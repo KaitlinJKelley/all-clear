@@ -4,6 +4,7 @@ import { Register } from "./auth/Register"
 import { userStorageKey } from "./auth/authSettings"
 import { RoutePage } from "./routes/RoutePage"
 import { RouteProvider } from "./routes/RouteProvider"
+import { TrafficProvider } from "./routes/TrafficProvider"
 // debugger
 export const Checkpoint = () => {
   return (
@@ -13,9 +14,11 @@ export const Checkpoint = () => {
           return (
             <>
               <RouteProvider>
-                <Route exact path="/">
-                  <RoutePage />
-                </Route>
+                <TrafficProvider>
+                  <Route exact path="/">
+                    <RoutePage />
+                  </Route>
+                </TrafficProvider>
               </RouteProvider>
             </>
           )
