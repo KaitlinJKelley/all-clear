@@ -19,6 +19,7 @@ export const RoutePage = () => {
     useEffect(() => {
         // gets and sets all routes
         getRoutes()
+        getIncidentAndLocation("1320 Blue Ridge Circle mobile al 36695", "715 Saint Emanuel st mobile al 36603")
     }, [])
 
     useEffect(() => {
@@ -33,25 +34,29 @@ export const RoutePage = () => {
     // Consider moving entire map into conditional and setting a state variable to call inside JSX
     // If it still doesn't work, ASK JISIE
 
-    useEffect(() => {
-        if (userRoutes.length > 0) {
-            // debugger
-            const promise = userRoutes.map(route => {
-                if (userRoutes.length > 0) {
-                    return getIncidentAndLocation(route.origin, route.destination)
+    // useEffect(() => {
+    //     if (userRoutes.length > 0) {
+    //         // debugger
+    //         const promise = userRoutes.map(route => {
+    //             if (userRoutes.length > 0) {
+    //                 // return getIncidentAndLocation(route.origin, route.destination)
 
-                }
-            })
-            Promise.all(promise)
-                // Passes in an array of nested arrays, where each nested array contains a lat/long pair; line 61
-                .then(() => {
-                    console.log(incidents)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        }
-    }, [userRoutes])
+    //             }
+    //         })
+    //         Promise.all(promise)
+    //             // Passes in an array of nested arrays, where each nested array contains a lat/long pair; line 61
+    //             .then(() => {
+    //                 console.log(incidents)
+    //             })
+    //             .catch(error => {
+    //                 console.log(error)
+    //             })
+    //     }
+    // }, [userRoutes])
+
+    useEffect(() => {
+        console.log("route page incidents",incidents)
+    }, [incidents])
 
 
     return (
