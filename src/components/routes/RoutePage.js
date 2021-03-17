@@ -14,6 +14,7 @@ export const RoutePage = () => {
     const { getIncidentAndLocation } = useContext(TrafficContext)
     // Declares state variable to be mapped once useEffect runs
     const [userRoutes, setUserRoutes] = useState([])
+    const [incidents, setIncidents] = useState([])
 
     useEffect(() => {
         // gets and sets all routes
@@ -32,9 +33,25 @@ export const RoutePage = () => {
     // Consider moving entire map into conditional and setting a state variable to call inside JSX
     // If it still doesn't work, ASK JISIE
 
-    // if (userRoutes.length > 0) {
-    //     setHaveRoutes(true)
-    // }
+    useEffect(() => {
+        if (userRoutes.length > 0) {
+            debugger
+            userRoutes.map(route => {
+                if (userRoutes.length > 0) {
+                    const promise = getIncidentAndLocation(route.origin, route.destination)
+                    Promise.all(promise)
+                        // Passes in an array of nested arrays, where each nested array contains a lat/long pair; line 61
+                        .then(trafficIncidents => {
+                            console.log(trafficIncidents)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                }
+            })
+        }
+    }, [userRoutes])
+   
 
     return (
         <>
@@ -45,24 +62,20 @@ export const RoutePage = () => {
                 <div className="savedRoutes__cards">
 
                     {userRoutes.map(route => {
-                        // if (userRoutes.length > 0) {
-                        const promise = getIncidentAndLocation(route.origin, route.destination)
-                        Promise.all(promise)
+
                         // Passes in an array of nested arrays, where each nested array contains a lat/long pair; line 61
-                        .then(incidents => {
-                            // debugger
-                            // on each object iteration invoke RouteCard component and pass routeName as props
-                            console.log(incidents)
-                            return <RouteCard key={route.id} routeName={route.name} />
-                        })
-                        .catch(error => {
-                            console.log(error)
-                        })
-                            // .then(incidents => {
-                            //     // on each object iteration invoke RouteCard component and pass routeName as props
-                            //     console.log(incidents)
-                            //     return <RouteCard key={route.id} routeName={route.name} />
-                            // })
+
+                        // debugger
+                        // on each object iteration invoke RouteCard component and pass routeName as props
+                        console.log(incidents)
+                        return <RouteCard key={route.id} routeName={route.name} incidents={incidents} />
+
+
+                        // .then(incidents => {
+                        //     // on each object iteration invoke RouteCard component and pass routeName as props
+                        //     console.log(incidents)
+                        //     return <RouteCard key={route.id} routeName={route.name} />
+                        // })
                         // }
                     })}
 
