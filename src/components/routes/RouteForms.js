@@ -1,12 +1,12 @@
 // Reponsible for Route Form layout and state
 import React, { useContext, useState, useEffect } from "react"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
-import { userStorageKey } from "../auth/authSettings"
+import { currentUser, currentUserId, userStorageKey } from "../auth/authSettings"
 import { RouteContext } from "./RouteProvider"
 
 export const RouteForms = () => {
     // imports functions to be used in this component
-    const { getLatLong, getDirections, addNewRoute } = useContext(RouteContext)
+    const { getLatLong, getDirections, addNewRoute, getRoutes } = useContext(RouteContext)
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
@@ -69,7 +69,7 @@ export const RouteForms = () => {
             name: options.name,
             origin: options.originStreet + " " + options.originCSZ,
             destination: options.destinationStreet + " " + options.destinationCSZ,
-            userId: parseInt(sessionStorage.getItem(userStorageKey))
+            userId: currentUserId
         }
         // change route state to match newRoute
         setRoute(newRoute)
@@ -85,6 +85,7 @@ export const RouteForms = () => {
                 })
                 .then(() => getLatLong(route.destination))
                 .then(res => {
+                    // changes empty object variable equal to an object containing lat/long pair
                     return destinationLatLong = res.items[0].position
                 })
                 // Returns turn by turn directions from origin to destination
@@ -96,6 +97,12 @@ export const RouteForms = () => {
         }
 
     }, [options])
+    // Invokes getRoutes when path variable changes
+    // This changes the state of the routes variable (in the RouteProvider) when a new route is saved, 
+    // so the RoutePage automatically updates with the new route
+    useEffect(() => {
+        getRoutes()
+    }, [path])
 
     return (
         <>
@@ -135,6 +142,8 @@ export const RouteForms = () => {
                 {path.join(" to ")}
             </div>
             <button className="btn--saveRoute" type="submit"
+            // Button is disabled until isComplete equals true
+            // When the user clicks Save Route, invoke handleSaveClick
             disabled={!isComplete} onClick={() => handleSaveClick()}>Save Route</button>
         </>
     )

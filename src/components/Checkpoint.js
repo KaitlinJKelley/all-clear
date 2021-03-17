@@ -13,7 +13,7 @@ export const Checkpoint = () => {
           return (
             <>
             <RouteProvider>
-              <RoutePage />
+                <RoutePage />
             </RouteProvider>
             </>
           )
