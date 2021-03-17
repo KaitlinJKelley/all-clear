@@ -20,19 +20,23 @@ export const TrafficProvider = (props) => {
                     console.log("you don't want that response")
                 }
             })
-            .then(res => res.json())
-            .then(res => console.log("response", res))
+            .then(res => {
+                // debugger
+                res.json()})
+            .then(res => console.log("response", res.TRAFFICITEMS.TRAFFICITEM))
     }
 
     const getIncidentAndLocation = (origin, destination) => {
         // debugger
         let originString = origin
         let destinationString = destination
+        // debugger
         getLatLong(origin)
         .then(res => {
                 // debugger
                 // position is the object conataining the lat/long pair
                 // debugger
+                console.log("LOOK HERE",res)
                 return origin = res.items[0].position
             })
             // Returns lat/long of user/s destination opint
@@ -55,6 +59,7 @@ export const TrafficProvider = (props) => {
                 // Maps the formatted street names and gets lat/long for each
                 let arrayOfPromises = FormattedStreetNames.map(streetName => {
                     // Runs each street name string through the geocoder API to the lat/long
+                    // debugger
                     return getLatLong(streetName)
                         .then(options => {
                             // Splits the CSZ strings into [city, state, zip]

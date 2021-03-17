@@ -35,23 +35,24 @@ export const RoutePage = () => {
 
     useEffect(() => {
         if (userRoutes.length > 0) {
-            debugger
-            userRoutes.map(route => {
+            // debugger
+            const promise = userRoutes.map(route => {
                 if (userRoutes.length > 0) {
-                    const promise = getIncidentAndLocation(route.origin, route.destination)
-                    Promise.all(promise)
-                        // Passes in an array of nested arrays, where each nested array contains a lat/long pair; line 61
-                        .then(trafficIncidents => {
-                            console.log(trafficIncidents)
-                        })
-                        .catch(error => {
-                            console.log(error)
-                        })
+                    return getIncidentAndLocation(route.origin, route.destination)
+
                 }
             })
+            Promise.all(promise)
+                // Passes in an array of nested arrays, where each nested array contains a lat/long pair; line 61
+                .then(trafficIncidents => {
+                    console.log(trafficIncidents)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
         }
     }, [userRoutes])
-   
+
 
     return (
         <>
