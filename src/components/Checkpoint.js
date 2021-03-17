@@ -12,22 +12,24 @@ export const Checkpoint = () => {
         if (sessionStorage.getItem(userStorageKey)) {
           return (
             <>
-            <RouteProvider>
-                <RoutePage />
-            </RouteProvider>
+              <RouteProvider>
+                <Route exact path="/">
+                  <RoutePage />
+                </Route>
+              </RouteProvider>
             </>
           )
         } else {
           return <Redirect to="/login" />;
         }
-    }} />
+      }} />
 
-    <Route path="/login">
-      <Login />
-    </Route>
-    <Route path="/register">
-      <Register />
-    </Route>
-  </>
-)
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/register">
+        <Register />
+      </Route>
+    </>
+  )
 }
