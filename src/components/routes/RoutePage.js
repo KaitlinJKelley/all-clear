@@ -11,10 +11,10 @@ export const RoutePage = () => {
     // imports routes state variable and getRoutes function
     const { routes, getRoutes, getLatLong, getDirections } = useContext(RouteContext)
 
-    const { getIncidentAndLocation } = useContext(TrafficContext)
+    const { getIncidentAndLocation, incidents } = useContext(TrafficContext)
     // Declares state variable to be mapped once useEffect runs
     const [userRoutes, setUserRoutes] = useState([])
-    const [incidents, setIncidents] = useState([])
+    // const [incidents, setIncidents] = useState([])
 
     useEffect(() => {
         // gets and sets all routes
@@ -44,8 +44,8 @@ export const RoutePage = () => {
             })
             Promise.all(promise)
                 // Passes in an array of nested arrays, where each nested array contains a lat/long pair; line 61
-                .then(trafficIncidents => {
-                    console.log(trafficIncidents)
+                .then(() => {
+                    console.log(incidents)
                 })
                 .catch(error => {
                     console.log(error)

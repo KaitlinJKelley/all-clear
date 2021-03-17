@@ -1,10 +1,12 @@
-import React, { createContext, useContext } from "react"
+import React, { createContext, useContext, useState } from "react"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { RouteContext } from "./RouteProvider"
 
 export const TrafficContext = createContext()
 
 export const TrafficProvider = (props) => {
+
+    const [incidents, setIncidents] = useState([])
     // imports functions to be used in this component
     const { getLatLong, getDirections } = useContext(RouteContext)
 
@@ -15,7 +17,7 @@ export const TrafficProvider = (props) => {
             .then(res => {
                 if (res.ok) {
                     console.log("got a good response", res)
-                    return res
+                    setIncidents(res)
                 } else {
                     console.log("you don't want that response")
                 }
@@ -77,6 +79,7 @@ export const TrafficProvider = (props) => {
                         })
 
                 }).flat()
+                debugger
                 Promise.all(arrayOfPromises)
                     // Passes in an array of nested arrays, where each nested array contains a lat/long pair; line 61
                     .then((res) => getTrafficIncidentData(finalLatLong))
@@ -88,7 +91,7 @@ export const TrafficProvider = (props) => {
     }
     return (
         <TrafficContext.Provider value={{
-            getIncidentAndLocation
+            getIncidentAndLocation, incidents
         }}>
             {props.children}
         </TrafficContext.Provider>
