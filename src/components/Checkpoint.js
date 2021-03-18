@@ -4,6 +4,7 @@ import { Register } from "./auth/Register"
 import { userStorageKey } from "./auth/authSettings"
 import { RoutePage } from "./routes/RoutePage"
 import { RouteProvider } from "./routes/RouteProvider"
+import { TrafficProvider } from "./routes/TrafficProvider"
 // debugger
 export const Checkpoint = () => {
   return (
@@ -12,22 +13,26 @@ export const Checkpoint = () => {
         if (sessionStorage.getItem(userStorageKey)) {
           return (
             <>
-            <RouteProvider>
-                <RoutePage />
-            </RouteProvider>
+              <RouteProvider>
+                <TrafficProvider>
+                  <Route exact path="/">
+                    <RoutePage />
+                  </Route>
+                </TrafficProvider>
+              </RouteProvider>
             </>
           )
         } else {
           return <Redirect to="/login" />;
         }
-    }} />
+      }} />
 
-    <Route path="/login">
-      <Login />
-    </Route>
-    <Route path="/register">
-      <Register />
-    </Route>
-  </>
-)
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/register">
+        <Register />
+      </Route>
+    </>
+  )
 }

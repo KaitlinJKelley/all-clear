@@ -1,7 +1,7 @@
 // Reponsible for Route Form layout and state
 import React, { useContext, useState, useEffect } from "react"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
-import { currentUser, currentUserId, userStorageKey } from "../auth/authSettings"
+import { userStorageKey } from "../auth/authSettings"
 import { RouteContext } from "./RouteProvider"
 
 export const RouteForms = () => {
@@ -45,7 +45,6 @@ export const RouteForms = () => {
                 setIsComplete(true)
             }
         }
-
     }
 
     const handleSaveClick = () => {
@@ -63,6 +62,7 @@ export const RouteForms = () => {
     }
 
     useEffect(() => {
+        const currentUserId = parseInt(sessionStorage.getItem(userStorageKey))
         // Every time setOptions is called to change the options object's value
         // Decalre a newRoute variable that mirrors route variable layout with concatenated values
         const newRoute = {
@@ -77,7 +77,6 @@ export const RouteForms = () => {
         if (isComplete) {
             let originLatLong = {}
             let destinationLatLong = {}
-
             getLatLong(route.origin)
                 .then(res => {
                     // res.items[0].position is an object containing lat and long as key value pairs

@@ -1,13 +1,15 @@
 // Responsible for rendering user's Saved Routes and Route Form
 import React, { useContext, useEffect, useState } from "react"
-import { currentUserId } from "../auth/authSettings"
+import { getRouteStreetNames } from "../../modules/RouteStreetNames"
+import { userStorageKey } from "../auth/authSettings"
 import { RouteCard } from "./RouteCard"
 import { RouteForms } from "./RouteForms"
 import { RouteContext } from "./RouteProvider"
 
 export const RoutePage = () => {
     // imports routes state variable and getRoutes function
-    const { routes, getRoutes } = useContext(RouteContext)
+    const { routes, getRoutes, getLatLong, getDirections } = useContext(RouteContext)
+
     // Declares state variable to be mapped once useEffect runs
     const [userRoutes, setUserRoutes] = useState([])
 
@@ -17,10 +19,13 @@ export const RoutePage = () => {
     }, [])
 
     useEffect(() => {
+        // debugger
+        const currentUserId = parseInt(sessionStorage.getItem(userStorageKey))
         // filters the array containing all route objects and return and array containing only the objects for the currently logged in user
         const filteredRoutes = routes.filter(route => route.userId === currentUserId)
         // sets userRoutes equal to filteredRoutes
         setUserRoutes(filteredRoutes)
+
     }, [routes])
 
     return (
@@ -30,14 +35,10 @@ export const RoutePage = () => {
             <section className="savedRoutes">
                 <h2>Saved Routes</h2>
                 <div className="savedRoutes__cards">
-                    {userRoutes.length === 0 ? "Looks like you don't have any saved routes! Complete the form below to add a new route" :
-                        // Iterate each object in the userRoutes array
-                        userRoutes.map(route => {
-                            // on each object iteration invoke RouteCard component and pass routeName as props
-                            return <RouteCard key={route.id} routeName={route.name} />
-                        })
-                    }
-
+                    {userRoutes.map(route => {
+                        // Invokes RouteCard for every userRoute
+                        return <RouteCard key={route.id} routeObj={route} />
+                    })}
                 </div>
             </section>
             <div className="newRoute">
