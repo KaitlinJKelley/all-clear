@@ -8,7 +8,7 @@ export const RouteProvider = (props) => {
     //  Use HERE GeoCoding and Search API to convert street addresses to lat/long pair
     const getLatLong = (address) => {
         return fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${process.env.REACT_APP_API}`,)
-        .then(res => res.json())
+            .then(res => res.json())
     }
 
     // HERE Router API creates path from origin to destination
@@ -34,9 +34,14 @@ export const RouteProvider = (props) => {
             .then(routes => setRoutes(routes))
     }
 
+    const getRouteById = (routeObjId) => {
+        return fetch(`http://localhost:8088/routes/${routeObjId}`)
+            .then(res => res.json())
+    }
+
     return (
         <RouteContext.Provider value={{
-            getLatLong, getDirections, addNewRoute, getRoutes, routes
+            getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById
         }}>
             {props.children}
         </RouteContext.Provider>
