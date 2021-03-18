@@ -6,27 +6,29 @@ export const RouteCard = ({ routeObj }) => {
 
     // state variable that will contain traffic incidents for a certain route
     const [incidentsToPost, setIncidentsToPost] = useState([])
-
+    // Will store event.target.id after CheckTraffic is clicked
     const [eventId, setEventId] = useState(0)
-
-    const [messageToPost, setmessageToPost] = useState(<div></div>)
+    // Will store the message to be posted to the DOM on the appropriate card
+    const [messageToPost, setMessageToPost] = useState(<div></div>)
 
     const handleCheckTrafficClick = (event) => {
         // Gets incident data from API and sets incidents equal to an array of incident objects
         getIncidentAndLocation(routeObj.origin, routeObj.destination)
             .then(() => {
-
+                // Sets eventId equal to event.target.id (id of the route where the button was clicked)
                 setEventId(parseInt(event.target.id))
             })
     }
 
     const addDiv = () => {
+        // If eventId === the id of the object that was clicked
         if (eventId === routeObj.id) {
+            // If there are any incidents
             if (incidentsToPost.length > 0) {
                 // returns the content message for each incident
                 return <div>{incidentsToPost.map(incident => incident?.TRAFFICITEMDESCRIPTION[0].content)}</div>
             } else {
-                // Returns all clear message if no incidents are returned
+                // Returns all clear message if there are no incident objects in the array
                 return <div>All clear! There are no incidents blocking your route</div>
             }
         }
@@ -38,7 +40,8 @@ export const RouteCard = ({ routeObj }) => {
     }, [incidents])
 
     useEffect(() => {
-        setmessageToPost(addDiv())
+        // When eventId set messageToPost equal to whatever is returned from the addDiv function
+        setMessageToPost(addDiv())
     }, [eventId])
 
     return (
