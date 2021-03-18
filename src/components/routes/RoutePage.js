@@ -19,7 +19,7 @@ export const RoutePage = () => {
     useEffect(() => {
         // gets and sets all routes
         getRoutes()
-        // getIncidentAndLocation("1320 Blue Ridge Circle mobile al 36695", "715 Saint Emanuel st mobile al 36603")
+        getIncidentAndLocation("1320 Blue Ridge Circle mobile al 36695", "715 Saint Emanuel st mobile al 36603")
     }, [])
 
     useEffect(() => {

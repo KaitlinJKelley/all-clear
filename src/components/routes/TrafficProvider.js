@@ -27,7 +27,7 @@ export const TrafficProvider = (props) => {
                 }
             })
             // sets incidents equal to data that was returned from fetch call
-            .then(res => setIncidents(res))
+            .then(res => setIncidents(res.TRAFFICITEMS?.TRAFFICITEM))
     }
 
     const getIncidentAndLocation = (origin, destination) => {
@@ -56,34 +56,40 @@ export const TrafficProvider = (props) => {
                 return getDirections(originLatLong, destinationLatLong)
             })
             .then(route => {
-                // START HERE
-                //     // // Returns an array of just street names that the user will follow during their drive; line 21
+                // Runs the turn by turn directions through the getRouteStreetNames function
+                //Returns an array of street name strings that the user will follow during their drive
                 const streetNamesArray = getRouteStreetNames(route)
                 // Formats the list of street names to be converted to lat/long pairs
                 const FormattedStreetNames = streetNamesArray.map(string => string.replaceAll(" ", "+"))
 
                 // Maps the formatted street names and gets lat/long for each
                 arrayOfPromises = FormattedStreetNames.map(streetName => {
-                    // Runs each street name string through the geocoder API to the lat/long
+                    // Runs each street name string through the geocoder API to get the lat/long
                     return getLatLong(streetName)
 
                 })
+                // Waits for arrayOfPromises to return and then returns that result (the lat/long of each street name)
                 return Promise.all(arrayOfPromises)
             })
             .then(optionsArray => {
+                // optionsArray is an array of objects where each object contains an array of objects representing a potential street name
                 optionsArray.forEach(options => {
-                    
+
+                    // Splices the origin and destination string into an array of strings
                     const splitOrigin = origin.split(" ")
                     const splitDestination = destination.split(" ")
 
+                    // returns an array of a single string representing city name
                     const originCity = splitOrigin.splice(-3, 1)
                     const destinationCity = splitDestination.splice(-3, 1)
 
-                    // maps the returned options and chooses whichever lat/long pair from the object contains the origin or destination city name 
+                    // maps the items array for every object inside the optionsArray and chooses the object that contains a 
+                    // title key that includes either origin or destination city and pushes the lat/long values into finalLatLong array
                     options.items.map(item => item.title.toLowerCase().includes(`${originCity[0].toLowerCase()}`) ||
                         item.title.toLowerCase().includes(`${destinationCity[0].toLowerCase()}`) ? finalLatLong.push(Object.values(item.position)) : item)
                 })
             })
+            // Sets incident state equal to traffic incident data returned from fetch call
             .then(() => getTrafficIncidentData(finalLatLong))
             .catch(error => {
                 console.log(error)
