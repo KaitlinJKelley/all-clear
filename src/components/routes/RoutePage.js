@@ -5,21 +5,17 @@ import { userStorageKey } from "../auth/authSettings"
 import { RouteCard } from "./RouteCard"
 import { RouteForms } from "./RouteForms"
 import { RouteContext } from "./RouteProvider"
-import { TrafficContext } from "./TrafficProvider"
 
 export const RoutePage = () => {
     // imports routes state variable and getRoutes function
     const { routes, getRoutes, getLatLong, getDirections } = useContext(RouteContext)
 
-    const { getIncidentAndLocation, incidents } = useContext(TrafficContext)
     // Declares state variable to be mapped once useEffect runs
     const [userRoutes, setUserRoutes] = useState([])
-    // const [incidents, setIncidents] = useState([])
 
     useEffect(() => {
         // gets and sets all routes
         getRoutes()
-        getIncidentAndLocation("1320 Blue Ridge Circle mobile al 36695", "715 Saint Emanuel st mobile al 36603")
     }, [])
 
     useEffect(() => {
@@ -32,11 +28,6 @@ export const RoutePage = () => {
 
     }, [routes])
 
-    useEffect(() => {
-        console.log("route page incidents",incidents)
-    }, [incidents])
-
-
     return (
         <>
             <h1>Checkpoint</h1>
@@ -44,25 +35,10 @@ export const RoutePage = () => {
             <section className="savedRoutes">
                 <h2>Saved Routes</h2>
                 <div className="savedRoutes__cards">
-
                     {userRoutes.map(route => {
-
-                        // Passes in an array of nested arrays, where each nested array contains a lat/long pair; line 61
-
-                        // debugger
-                        // on each object iteration invoke RouteCard component and pass routeName as props
-                        console.log(incidents)
-                        return <RouteCard key={route.id} routeName={route.name} incidents={incidents} />
-
-
-                        // .then(incidents => {
-                        //     // on each object iteration invoke RouteCard component and pass routeName as props
-                        //     console.log(incidents)
-                        //     return <RouteCard key={route.id} routeName={route.name} />
-                        // })
-                        // }
+                        // Invokes RouteCard for every userRoute
+                        return <RouteCard key={route.id} routeObj={route} />
                     })}
-
                 </div>
             </section>
             <div className="newRoute">

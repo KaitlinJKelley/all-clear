@@ -77,7 +77,6 @@ export const RouteForms = () => {
         if (isComplete) {
             let originLatLong = {}
             let destinationLatLong = {}
-            debugger
             getLatLong(route.origin)
                 .then(res => {
                     // res.items[0].position is an object containing lat and long as key value pairs
