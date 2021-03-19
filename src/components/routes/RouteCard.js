@@ -13,10 +13,13 @@ export const RouteCard = ({ routeObj }) => {
     const [eventId, setEventId] = useState(0)
     // Will store the message to be posted to the DOM on the appropriate card
     const [messageToPost, setMessageToPost] = useState(<div></div>)
-
+    // Will be used to determine when to show buttons/input vs text
     const [editClicked, setEditClicked] = useState(false)
-
+    // will be used to generate fields for input and handle changes to route
     const [routeToEdit, setRouteToEdit] = useState({})
+
+    // Will be used to determine if all fields are complete
+    const [isComplete, setIsComplete] = useState(false)
 
     // TRAFFIC INFO
 
@@ -30,7 +33,6 @@ export const RouteCard = ({ routeObj }) => {
     }
 
     const addDiv = () => {
-        // debugger
         // If eventId === the id of the object that was clicked
         if (eventId === routeObj.id) {
             // If IncidentsToPost is not undefined
@@ -69,7 +71,7 @@ export const RouteCard = ({ routeObj }) => {
     const handleEditClick = () => {
         // Get the route that needs to be edited
         getRouteById(routeObj.id)
-            // set routeToEdit equal to the routeObj that needs to be edited
+            // set routeToEdit equal to the routeObj returned from the fetch call
             .then(routeObj => setRouteToEdit(routeObj))
     }
 
@@ -90,11 +92,19 @@ export const RouteCard = ({ routeObj }) => {
     return (
         <article>
             {/* In the empty div add the origin and destination input fields populated from the routeToEdit keys; don't forget the id */}
-            {editClicked ? <> <input id={"name"} type="text" value={routeToEdit.name} onChange={event => handleChangeInput(event)}></input> <div></div> </>
-            : <h3>{routeObj.name}</h3>}
+            {editClicked ?
+                <>
+                    <input id={"name"} type="text" value={routeToEdit.name} onChange={event => handleChangeInput(event)}></input>
+                    <div>
+                        <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
+                        <textarea id={"destination"} type="text" value={routeToEdit.destination} onChange={event => handleChangeInput(event)}></textarea>
+                    </div>
+                </>
+                : <h3>{routeObj.name}</h3>}
             {<button id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</button>}
             {messageToPost}
-            {editClicked ? <button className="button btn--save" onClick={() => { handleSaveClick(); setEditClicked(false) }} id={`${routeObj.id}`}>Save Changes</button>
+            {editClicked ?
+                <button className="button btn--save" disabled={!isComplete} onClick={() => { handleSaveClick(); setEditClicked(false) }} id={`${routeObj.id}`}>Save Changes</button>
                 : <button className="button btn--edit" onClick={() => { handleEditClick(); setEditClicked(true) }} id={`${routeObj.id}`}>Edit</button>}
             <button onClick={() => handleDeleteClick()}>Delete Route</button>
         </article>

@@ -47,7 +47,7 @@ export const RouteProvider = (props) => {
     }
 
     const updateRoute = routeObj => {
-        return fetch(`http://localhost:8088/messages/${routeObj.id}`, {
+        return fetch(`http://localhost:8088/routes/${routeObj.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
