@@ -14,19 +14,23 @@ export const RouteCard = ({ routeObj }) => {
     const handleCheckTrafficClick = (event) => {
         // Gets incident data from API and sets incidents equal to an array of incident objects
         getIncidentAndLocation(routeObj.origin, routeObj.destination)
-            .then(() => {
+            .then((res) => {
                 // Sets eventId equal to event.target.id (id of the route where the button was clicked)
                 setEventId(parseInt(event.target.id))
             })
     }
 
     const addDiv = () => {
+        // debugger
         // If eventId === the id of the object that was clicked
         if (eventId === routeObj.id) {
-            // If there are any incidents
-            if (incidentsToPost.length > 0) {
-                // returns the content message for each incident
-                return <div>{incidentsToPost.map(incident => incident?.TRAFFICITEMDESCRIPTION[0].content)}</div>
+            if (incidentsToPost) {
+                // If there are any incidents
+                if (incidentsToPost.length > 0) {
+                    // returns the content message for each incident
+                    // debugger
+                    return <div>{incidentsToPost.map(incident => incident?.TRAFFICITEMDESCRIPTION[0].content)}</div>
+                } 
             } else {
                 // Returns all clear message if there are no incident objects in the array
                 return <div>All clear! There are no incidents blocking your route</div>
@@ -36,7 +40,7 @@ export const RouteCard = ({ routeObj }) => {
 
     useEffect(() => {
         // When incidents variable changes, incidentsToPost is set equal to incidents
-        setIncidentsToPost(incidents)
+        setIncidentsToPost(incidents.TRAFFICITEMS?.TRAFFICITEM)
     }, [incidents])
 
     useEffect(() => {
