@@ -90,12 +90,12 @@ export const RouteCard = ({ routeObj }) => {
         const newRouteToEdit = { ...routeToEdit }
         // returns an array of strings; each string is a street name
         getRoutePath(newRouteToEdit.origin, newRouteToEdit.destination)
-            // set path equal to the array of street names
+            // set path equal to the array of street names so the user can view the street names on their route
             .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
     }
 
     useEffect(() => {
-        // Checks to see if the route is at least 15 characters long
+        // Checks to see if the route is at least 15 characters long; allows the user to save the route even if they don't make changes
         if (routeToEdit.origin?.length > 15 && routeToEdit.origin?.length > 15) {
             setIsComplete(true)
         } else {
