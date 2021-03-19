@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react"
+import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { RouteContext } from "./RouteProvider"
 import { TrafficContext } from "./TrafficProvider"
 
 export const RouteCard = ({ routeObj }) => {
     const { getIncidentAndLocation, incidents } = useContext(TrafficContext)
 
-    const { deleteRoute, getRouteById, updateRoute } = useContext(RouteContext)
+    const { deleteRoute, getRouteById, updateRoute, getLatLong, getDirections } = useContext(RouteContext)
 
     // state variable that will contain traffic incidents for a certain route
     const [incidentsToPost, setIncidentsToPost] = useState([])
@@ -17,9 +18,10 @@ export const RouteCard = ({ routeObj }) => {
     const [editClicked, setEditClicked] = useState(false)
     // will be used to generate fields for input and handle changes to route
     const [routeToEdit, setRouteToEdit] = useState({})
-
     // Will be used to determine if all fields are complete
     const [isComplete, setIsComplete] = useState(false)
+    // Will be used to cause re-render when array of street names is ready to be displayed on DOM
+    const [path, setPath] = useState([])
 
     // TRAFFIC INFO
 
@@ -81,8 +83,68 @@ export const RouteCard = ({ routeObj }) => {
         // Go to the key that matches the id of the input field being changed and reassign that key to whatever the user typed
         newRouteToEdit[event.target.id] = event.target.value
         // set routeToEdit equal to the changed route
+        // debugger
         setRouteToEdit(newRouteToEdit)
+        // .then(() => {
+        //     // If none of the values in the newRouteToEdit object are empty strings
+        //     // debugger
+        //     if (Object.values(routeToEdit).includes("") === false) {
+        //         if (newRouteToEdit.origin.length < 10 && newRouteToEdit.destination.length < 10) {
+        //             // isComplete is true, which means all input fields are filled
+        //             setIsComplete(false)
+        //         } else {
+        //             setIsComplete(true)
+        //         }
+        //     }
+        // })
+
     }
+
+    useEffect(() => {
+        // If none of the values in the newRouteToEdit object are empty strings
+        // debugger
+        const newRouteToEdit = { ...routeToEdit }
+        if (Object.values(routeToEdit).includes("") === false) {
+            // debugger
+            console.log("origin length",newRouteToEdit.origin?.length)
+            console.log("destination length",newRouteToEdit.destination?.length)
+            if (newRouteToEdit.origin?.length < 10 && newRouteToEdit.destination?.length < 10) {
+                setIsComplete(false)
+            } else {
+                // debugger
+                setIsComplete(true)
+            }
+        }
+    }, [routeToEdit])
+
+    useEffect(() => {
+        // if all input fields are filled in
+        // debugger
+        if (isComplete) {
+            if (routeToEdit.origin && routeToEdit.destination) {
+
+                let originLatLong = {}
+                let destinationLatLong = {}
+                getLatLong(routeToEdit.origin)
+                    .then(res => {
+                        // res.items[0].position is an object containing lat and long as key value pairs
+                        return originLatLong = res.items[0].position
+                    })
+                    .then(() => getLatLong(routeToEdit.destination))
+                    .then(res => {
+                        // changes empty object variable equal to an object containing lat/long pair
+                        return destinationLatLong = res.items[0].position
+                    })
+                    // Returns turn by turn directions from origin to destination
+                    .then(() => getDirections(originLatLong, destinationLatLong))
+                    // Returns an array of strings, where wach string is the next street a user should take 
+                    .then(directions => getRouteStreetNames(directions))
+                    // sets path state variable equal to array of street names to invoke re-render
+                    .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
+            }
+        }
+
+    }, [isComplete])
 
     const handleSaveClick = () => {
         // Update the route in the database to match the changed route
@@ -99,6 +161,10 @@ export const RouteCard = ({ routeObj }) => {
                     <div>
                         <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
                         <textarea id={"destination"} type="text" value={routeToEdit.destination} onChange={event => handleChangeInput(event)}></textarea>
+                    </div>
+                    <div className="newRoute__path">
+                        <h3>Your Route Path</h3>
+                        {path.join(" to ")}
                     </div>
                 </>
                 // If false, just display the route name as a header
