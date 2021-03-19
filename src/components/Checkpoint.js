@@ -11,6 +11,7 @@ export const Checkpoint = () => {
     <>
       <Route render={() => {
         if (sessionStorage.getItem(userStorageKey)) {
+          // If the user is logged in
           return (
             <>
               <RouteProvider>

@@ -1,7 +1,6 @@
 // Responsible for rendering user's Saved Routes and Route Form
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router"
-import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { userStorageKey } from "../auth/authSettings"
 import { RouteCard } from "./RouteCard"
 import { RouteForms } from "./RouteForms"
@@ -9,7 +8,7 @@ import { RouteContext } from "./RouteProvider"
 
 export const RoutePage = () => {
     // imports routes state variable and getRoutes function
-    const { routes, getRoutes, getLatLong, getDirections } = useContext(RouteContext)
+    const { routes, getRoutes } = useContext(RouteContext)
 
     // Declares state variable to be mapped once useEffect runs
     const [userRoutes, setUserRoutes] = useState([])
@@ -17,7 +16,7 @@ export const RoutePage = () => {
     const history = useHistory()
 
     useEffect(() => {
-        // gets and sets all routes
+        // calls local API to get routes collection
         getRoutes()
     }, [])
 
