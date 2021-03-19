@@ -39,9 +39,16 @@ export const RouteProvider = (props) => {
             .then(res => res.json())
     }
 
+    const deleteRoute = (routeId) => {
+        return fetch(`http://localhost:8088/routes/${routeId}`, {
+            method: "DELETE"
+        })
+            .then(getRoutes)
+    }
+
     return (
         <RouteContext.Provider value={{
-            getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById
+            getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById, deleteRoute
         }}>
             {props.children}
         </RouteContext.Provider>

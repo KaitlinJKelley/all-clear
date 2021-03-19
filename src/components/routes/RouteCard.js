@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from "react"
+import { RouteContext } from "./RouteProvider"
 import { TrafficContext } from "./TrafficProvider"
 
 export const RouteCard = ({ routeObj }) => {
     const { getIncidentAndLocation, incidents } = useContext(TrafficContext)
+
+    const { deleteRoute } = useContext(RouteContext)
 
     // state variable that will contain traffic incidents for a certain route
     const [incidentsToPost, setIncidentsToPost] = useState([])
@@ -24,6 +27,7 @@ export const RouteCard = ({ routeObj }) => {
         // debugger
         // If eventId === the id of the object that was clicked
         if (eventId === routeObj.id) {
+            // If IncidentsToPost is not undefined
             if (incidentsToPost) {
                 // If there are any incidents
                 if (incidentsToPost.length > 0) {
@@ -48,12 +52,22 @@ export const RouteCard = ({ routeObj }) => {
         setMessageToPost(addDiv())
     }, [eventId])
 
+    const handleEditClick = () => {
+        
+    }
+
+    const handleDeleteClick = () => {
+        debugger
+        deleteRoute(routeObj.id)
+    }
+
     return (
         <article>
             <h3>{routeObj.name}</h3>
             {<button id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</button>}
-            <button>Edit Route</button>
             {messageToPost}
+            <button>Edit Route</button>
+            <button onClick={() => handleDeleteClick()}>Delete Route</button>
         </article>
     )
 }
