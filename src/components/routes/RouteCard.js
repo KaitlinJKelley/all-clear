@@ -4,7 +4,7 @@ import { RouteContext } from "./RouteProvider"
 import { TrafficContext } from "./TrafficProvider"
 
 export const RouteCard = ({ routeObj }) => {
-    const { getIncidentAndLocation, incidents } = useContext(TrafficContext)
+    const { getIncidentAndLocation, incidents, getRoutePath } = useContext(TrafficContext)
 
     const { deleteRoute, getRouteById, updateRoute, getLatLong, getDirections } = useContext(RouteContext)
 
@@ -84,71 +84,26 @@ export const RouteCard = ({ routeObj }) => {
         newRouteToEdit[event.target.id] = event.target.value
         // set routeToEdit equal to the changed route
         // debugger
-        setRouteToEdit(newRouteToEdit)
-        // .then(() => {
-        //     // If none of the values in the newRouteToEdit object are empty strings
-        //     // debugger
-        //     if (Object.values(routeToEdit).includes("") === false) {
-        //         if (newRouteToEdit.origin.length < 10 && newRouteToEdit.destination.length < 10) {
-        //             // isComplete is true, which means all input fields are filled
-        //             setIsComplete(false)
-        //         } else {
-        //             setIsComplete(true)
-        //         }
-        //     }
-        // })
+        setRouteToEdit(newRouteToEdit)  
+    }
 
+    const handleViewPathClick = () => {
+        const newRouteToEdit = { ...routeToEdit }
+        
+        getRoutePath(newRouteToEdit.origin, newRouteToEdit.destination)
+        .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
     }
 
     useEffect(() => {
-        // If none of the values in the newRouteToEdit object are empty strings
-        // debugger
-        const newRouteToEdit = { ...routeToEdit }
         if (Object.values(routeToEdit).includes("") === false) {
-            // debugger
-            console.log("origin length",newRouteToEdit.origin?.length)
-            console.log("destination length",newRouteToEdit.destination?.length)
-            if (newRouteToEdit.origin?.length < 10 && newRouteToEdit.destination?.length < 10) {
-                setIsComplete(false)
-            } else {
-                // debugger
-                setIsComplete(true)
-            }
+            setIsComplete(true)
         }
     }, [routeToEdit])
-
-    useEffect(() => {
-        // if all input fields are filled in
-        // debugger
-        if (isComplete) {
-            if (routeToEdit.origin && routeToEdit.destination) {
-
-                let originLatLong = {}
-                let destinationLatLong = {}
-                getLatLong(routeToEdit.origin)
-                    .then(res => {
-                        // res.items[0].position is an object containing lat and long as key value pairs
-                        return originLatLong = res.items[0].position
-                    })
-                    .then(() => getLatLong(routeToEdit.destination))
-                    .then(res => {
-                        // changes empty object variable equal to an object containing lat/long pair
-                        return destinationLatLong = res.items[0].position
-                    })
-                    // Returns turn by turn directions from origin to destination
-                    .then(() => getDirections(originLatLong, destinationLatLong))
-                    // Returns an array of strings, where wach string is the next street a user should take 
-                    .then(directions => getRouteStreetNames(directions))
-                    // sets path state variable equal to array of street names to invoke re-render
-                    .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
-            }
-        }
-
-    }, [isComplete])
 
     const handleSaveClick = () => {
         // Update the route in the database to match the changed route
         updateRoute(routeToEdit)
+        setPath([])
     }
 
     return (
@@ -161,6 +116,7 @@ export const RouteCard = ({ routeObj }) => {
                     <div>
                         <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
                         <textarea id={"destination"} type="text" value={routeToEdit.destination} onChange={event => handleChangeInput(event)}></textarea>
+                        <button onClick={() => handleViewPathClick()}>View Route Path</button>
                     </div>
                     <div className="newRoute__path">
                         <h3>Your Route Path</h3>
