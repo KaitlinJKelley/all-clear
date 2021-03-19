@@ -3,10 +3,12 @@ import React, { useContext, useState, useEffect } from "react"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { userStorageKey } from "../auth/authSettings"
 import { RouteContext } from "./RouteProvider"
+import { TrafficContext } from "./TrafficProvider"
 
 export const RouteForms = () => {
     // imports functions to be used in this component
     const { getLatLong, getDirections, addNewRoute, getRoutes } = useContext(RouteContext)
+    const { getRoutePath } = useContext(TrafficContext)
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
@@ -75,22 +77,23 @@ export const RouteForms = () => {
         setRoute(newRoute)
         // if all input fields are filled
         if (isComplete) {
-            let originLatLong = {}
-            let destinationLatLong = {}
-            getLatLong(route.origin)
-                .then(res => {
-                    // res.items[0].position is an object containing lat and long as key value pairs
-                    return originLatLong = res.items[0].position
-                })
-                .then(() => getLatLong(route.destination))
-                .then(res => {
-                    // changes empty object variable equal to an object containing lat/long pair
-                    return destinationLatLong = res.items[0].position
-                })
-                // Returns turn by turn directions from origin to destination
-                .then(() => getDirections(originLatLong, destinationLatLong))
-                // Returns an array of strings, where wach string is the next street a user should take 
-                .then(directions => getRouteStreetNames(directions))
+            // let originLatLong = {}
+            // let destinationLatLong = {}
+            // getLatLong(route.origin)
+            //     .then(res => {
+            //         // res.items[0].position is an object containing lat and long as key value pairs
+            //         return originLatLong = res.items[0].position
+            //     })
+            //     .then(() => getLatLong(route.destination))
+            //     .then(res => {
+            //         // changes empty object variable equal to an object containing lat/long pair
+            //         return destinationLatLong = res.items[0].position
+            //     })
+            //     // Returns turn by turn directions from origin to destination
+            //     .then(() => getDirections(originLatLong, destinationLatLong))
+            //     // Returns an array of strings, where wach string is the next street a user should take 
+            //     .then(directions => getRouteStreetNames(directions))
+            getRoutePath(newRoute.origin, newRoute.destination)
                 // sets path state variable equal to array of street names to invoke re-render
                 .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
         }

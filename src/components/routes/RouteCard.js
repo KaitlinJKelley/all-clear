@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react"
+import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { RouteContext } from "./RouteProvider"
 import { TrafficContext } from "./TrafficProvider"
 
 export const RouteCard = ({ routeObj }) => {
-    const { getIncidentAndLocation, incidents } = useContext(TrafficContext)
+    const { getIncidentAndLocation, incidents, getRoutePath } = useContext(TrafficContext)
 
-    const { deleteRoute, getRouteById, updateRoute } = useContext(RouteContext)
+    const { deleteRoute, getRouteById, updateRoute, getLatLong, getDirections } = useContext(RouteContext)
 
     // state variable that will contain traffic incidents for a certain route
     const [incidentsToPost, setIncidentsToPost] = useState([])
@@ -17,9 +18,10 @@ export const RouteCard = ({ routeObj }) => {
     const [editClicked, setEditClicked] = useState(false)
     // will be used to generate fields for input and handle changes to route
     const [routeToEdit, setRouteToEdit] = useState({})
-
     // Will be used to determine if all fields are complete
     const [isComplete, setIsComplete] = useState(false)
+    // Will be used to cause re-render when array of street names is ready to be displayed on DOM
+    const [path, setPath] = useState([])
 
     // TRAFFIC INFO
 
@@ -84,28 +86,61 @@ export const RouteCard = ({ routeObj }) => {
         setRouteToEdit(newRouteToEdit)
     }
 
+    const handleViewPathClick = () => {
+        const newRouteToEdit = { ...routeToEdit }
+        // returns an array of strings; each string is a street name
+        getRoutePath(newRouteToEdit.origin, newRouteToEdit.destination)
+            // set path equal to the array of street names so the user can view the street names on their route
+            .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
+    }
+
+    useEffect(() => {
+        // Checks to see if the route is at least 15 characters long; allows the user to save the route even if they don't make changes
+        if (routeToEdit.origin?.length > 15 && routeToEdit.origin?.length > 15) {
+            setIsComplete(true)
+        } else {
+            setIsComplete(false)
+        }
+    }, [routeToEdit])
+
     const handleSaveClick = () => {
         // Update the route in the database to match the changed route
         updateRoute(routeToEdit)
+        // sets path back to an empty array ro remove the route path from the card
+        setPath([])
     }
 
     return (
         <article>
-            {/* In the empty div add the origin and destination input fields populated from the routeToEdit keys; don't forget the id */}
+            {/* Checks to see if editClicked is true */}
             {editClicked ?
                 <>
+                    {/* If true, display inout field/textarea fields containing route name, origin, and destination that the user can change */}
                     <input id={"name"} type="text" value={routeToEdit.name} onChange={event => handleChangeInput(event)}></input>
                     <div>
                         <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
                         <textarea id={"destination"} type="text" value={routeToEdit.destination} onChange={event => handleChangeInput(event)}></textarea>
+                        <button onClick={() => handleViewPathClick()}>View Route Path</button>
+                    </div>
+                    <div className="newRoute__path">
+                        <h3>Your Route Path</h3>
+                        {/* Use css white space pre-wrap to force line breaks? or display flex on div */}
+                        {path.join(" to ")}
                     </div>
                 </>
+                // If false, just display the route name as a header
                 : <h3>{routeObj.name}</h3>}
+            {/* Check Traffic Button */}
             {<button id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</button>}
+
             {messageToPost}
+            {/* Checks to see if editClicked is true */}
             {editClicked ?
+                // If true, display a Save button; disabled when any field is incomplete 
                 <button className="button btn--save" disabled={!isComplete} onClick={() => { handleSaveClick(); setEditClicked(false) }} id={`${routeObj.id}`}>Save Changes</button>
+                // If false, display Edit button
                 : <button className="button btn--edit" onClick={() => { handleEditClick(); setEditClicked(true) }} id={`${routeObj.id}`}>Edit</button>}
+            {/* Delete button */}
             <button onClick={() => handleDeleteClick()}>Delete Route</button>
         </article>
     )
