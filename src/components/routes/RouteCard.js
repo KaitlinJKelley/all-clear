@@ -83,26 +83,30 @@ export const RouteCard = ({ routeObj }) => {
         // Go to the key that matches the id of the input field being changed and reassign that key to whatever the user typed
         newRouteToEdit[event.target.id] = event.target.value
         // set routeToEdit equal to the changed route
-        // debugger
-        setRouteToEdit(newRouteToEdit)  
+        setRouteToEdit(newRouteToEdit)
     }
 
     const handleViewPathClick = () => {
         const newRouteToEdit = { ...routeToEdit }
-        
+        // returns an array of strings; each string is a street name
         getRoutePath(newRouteToEdit.origin, newRouteToEdit.destination)
-        .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
+            // set path equal to the array of street names
+            .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
     }
 
     useEffect(() => {
-        if (Object.values(routeToEdit).includes("") === false) {
+        // Checks to see if the route is at least 15 characters long
+        if (routeToEdit.origin?.length > 15 && routeToEdit.origin?.length > 15) {
             setIsComplete(true)
+        } else {
+            setIsComplete(false)
         }
     }, [routeToEdit])
 
     const handleSaveClick = () => {
         // Update the route in the database to match the changed route
         updateRoute(routeToEdit)
+        // sets path back to an empty array ro remove the route path from the card
         setPath([])
     }
 
@@ -120,6 +124,7 @@ export const RouteCard = ({ routeObj }) => {
                     </div>
                     <div className="newRoute__path">
                         <h3>Your Route Path</h3>
+                        {/* Use css white space pre-wrap to force line breaks? or display flex on div */}
                         {path.join(" to ")}
                     </div>
                 </>
