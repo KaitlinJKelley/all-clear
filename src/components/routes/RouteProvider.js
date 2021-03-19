@@ -46,9 +46,20 @@ export const RouteProvider = (props) => {
             .then(getRoutes)
     }
 
+    const updateRoute = routeObj => {
+        return fetch(`http://localhost:8088/messages/${routeObj.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(routeObj)
+        })
+            .then(getRoutes)
+    }
+
     return (
         <RouteContext.Provider value={{
-            getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById, deleteRoute
+            getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById, deleteRoute, updateRoute
         }}>
             {props.children}
         </RouteContext.Provider>
