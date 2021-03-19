@@ -1,5 +1,6 @@
 // Responsible for rendering user's Saved Routes and Route Form
 import React, { useContext, useEffect, useState } from "react"
+import { useHistory } from "react-router"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { userStorageKey } from "../auth/authSettings"
 import { RouteCard } from "./RouteCard"
@@ -12,6 +13,8 @@ export const RoutePage = () => {
 
     // Declares state variable to be mapped once useEffect runs
     const [userRoutes, setUserRoutes] = useState([])
+
+    const history = useHistory()
 
     useEffect(() => {
         // gets and sets all routes
@@ -28,10 +31,15 @@ export const RoutePage = () => {
 
     }, [routes])
 
+    const handleLogout = () => {
+        sessionStorage.removeItem('app_user_id')
+        history.push("/")
+      }
+
     return (
         <>
             <h1>Checkpoint</h1>
-            <button className="btn--logout">Logout</button>
+            <button className="btn--logout" onClick={() => handleLogout()}>Logout</button>
             <section className="savedRoutes">
                 <h2>Saved Routes</h2>
                 <div className="savedRoutes__cards">
