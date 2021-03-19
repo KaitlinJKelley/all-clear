@@ -6,7 +6,7 @@ export const TrafficContext = createContext()
 
 export const TrafficProvider = (props) => {
     // Declares state variable that can be set once traffice data is returned
-    const [incidents, setIncidents] = useState([])
+    const [incidents, setIncidents] = useState({})
 
     // imports functions to be used in this component
     const { getLatLong, getDirections } = useContext(RouteContext)
@@ -28,8 +28,9 @@ export const TrafficProvider = (props) => {
             })
             // sets incidents equal to data that was returned from fetch call
             .then(res => {
-                console.log(res?.TRAFFICITEMS.TRAFFICITEM)
-                setIncidents(res?.TRAFFICITEMS.TRAFFICITEM)
+                // debugger
+                console.log(res)
+                setIncidents(res)
                 })
     }
 
