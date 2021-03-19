@@ -91,21 +91,29 @@ export const RouteCard = ({ routeObj }) => {
 
     return (
         <article>
-            {/* In the empty div add the origin and destination input fields populated from the routeToEdit keys; don't forget the id */}
+            {/* Checks to see if editClicked is true */}
             {editClicked ?
                 <>
+                    {/* If true, display inout field/textarea fields containing route name, origin, and destination that the user can change */}
                     <input id={"name"} type="text" value={routeToEdit.name} onChange={event => handleChangeInput(event)}></input>
                     <div>
                         <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
                         <textarea id={"destination"} type="text" value={routeToEdit.destination} onChange={event => handleChangeInput(event)}></textarea>
                     </div>
                 </>
+                // If false, just display the route name as a header
                 : <h3>{routeObj.name}</h3>}
+            {/* Check Traffic Button */}
             {<button id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</button>}
+
             {messageToPost}
+            {/* Checks to see if editClicked is true */}
             {editClicked ?
+                // If true, display a Save button; disabled when any field is incomplete 
                 <button className="button btn--save" disabled={!isComplete} onClick={() => { handleSaveClick(); setEditClicked(false) }} id={`${routeObj.id}`}>Save Changes</button>
+                // If false, display Edit button
                 : <button className="button btn--edit" onClick={() => { handleEditClick(); setEditClicked(true) }} id={`${routeObj.id}`}>Edit</button>}
+            {/* Delete button */}
             <button onClick={() => handleDeleteClick()}>Delete Route</button>
         </article>
     )
