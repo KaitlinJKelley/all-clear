@@ -1,7 +1,6 @@
 // Returns an array of just street names that the user will follow during their drive
 
 export const getRouteStreetNames = (route) => {
-    console.log("turn by turn",route.routes[0].sections[0].turnByTurnActions)
     // route.routes[0].sections[0].turnByTurnActions is an array of action objects like arrive, turn, continue
     const turnByTurnDirections = route.routes[0].sections[0].turnByTurnActions
 

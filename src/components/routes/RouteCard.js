@@ -54,7 +54,7 @@ export const RouteCard = ({ routeObj }) => {
 
     useEffect(() => {
         // When incidents variable changes, incidentsToPost is set equal to an array incident objects
-        setIncidentsToPost(incidents.TRAFFICITEMS?.TRAFFICITEM)
+        setIncidentsToPost(incidents?.TRAFFICITEMS?.TRAFFICITEM)
     }, [incidents])
 
     useEffect(() => {

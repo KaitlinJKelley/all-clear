@@ -1,9 +1,22 @@
 {
   "users": [
     {
-      "email": "test@test.com",
-      "name": "test user",
+      "email": "kaitlin@kaitlin.com",
+      "firstName": "Kaitlin",
+      "lastName": "Kelley",
       "id": 1
+    },
+    {
+      "email": "test@test.com",
+      "firstName": "test",
+      "lastName": "user",
+      "id": 2
+    },
+    {
+      "email": "jisie@jisie.com",
+      "firstName": "Jisie",
+      "lastName": "David",
+      "id": 3
     }
   ],
   "routes": [
@@ -15,11 +28,18 @@
       "id": 2
     },
     {
-      "name": "Home To Work",
-      "origin": "1320 Blue Ridge Circle mobile al 36695",
-      "destination": "107 Mildred Street Columbiana, AL 35051",
-      "userId": 1,
-      "id": 3
+      "name": "Home to Grocery Store",
+      "origin": "1620 Fulton Street  Brooklyn, NY 11213",
+      "destination": "77 Green Acres Rd S Valley Stream, NY 11581",
+      "userId": 2,
+      "id": 4
+    },
+    {
+      "name": "Home To Starbucks",
+      "origin": "4247 N. Eagle Rock Blvd. Los Angeles, CA 90065",
+      "destination": "138 S Central Ave Los Angeles, CA 90012",
+      "userId": 3,
+      "id": 5
     }
   ]
 }

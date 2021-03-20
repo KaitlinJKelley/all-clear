@@ -11,7 +11,7 @@ export const RouteForms = () => {
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
-    const [path, setPath] = useState([])
+    const [path, setPath] = useState(["Don't forget to check your path before clicking Save!"])
     // Will be used to save route to database
     const [route, setRoute] = useState({})
     // Because an input field can't be matched to a route key, this state variable will be used until all fields are ready to setRoute
@@ -45,16 +45,16 @@ export const RouteForms = () => {
 
     const handleSaveClick = () => {
         // debugger
-       addNewRoute(route)
-       setOptions({
+        addNewRoute(route)
+        setOptions({
             name: "",
             originStreet: "",
             originCSZ: "",
             destinationStreet: "",
             destinationCSZ: ""
-       })
-       setPath([])
-       setIsComplete(false)
+        })
+        setPath([])
+        setIsComplete(false)
     }
 
     useEffect(() => {
@@ -88,7 +88,7 @@ export const RouteForms = () => {
     return (
         <>
             <form className="newRoute__forms--origin">
-            <fieldset>
+                <fieldset>
                     <label htmlFor="name">Route Name (ex. Home to Work)</label>
                     <input type="text" name="name" value={options.name} onChange={event => handleInputChange(event)} required></input>
                 </fieldset>
@@ -123,9 +123,9 @@ export const RouteForms = () => {
                 {path.join(" to ")}
             </div>
             <button className="btn--saveRoute" type="submit"
-            // Button is disabled until isComplete equals true
-            // When the user clicks Save Route, invoke handleSaveClick
-            disabled={!isComplete} onClick={() => handleSaveClick()}>Save Route</button>
+                // Button is disabled until isComplete equals true
+                // When the user clicks Save Route, invoke handleSaveClick
+                disabled={!isComplete} onClick={() => handleSaveClick()}>Save Route</button>
         </>
     )
 }
