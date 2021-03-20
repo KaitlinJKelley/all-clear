@@ -4,9 +4,9 @@ import { RouteContext } from "./RouteProvider"
 import { TrafficContext } from "./TrafficProvider"
 
 export const RouteCard = ({ routeObj }) => {
-    const { getIncidentAndLocation, incidents, getRoutePath } = useContext(TrafficContext)
+    const { getIncidentAndLocation, incidents } = useContext(TrafficContext)
 
-    const { deleteRoute, getRouteById, updateRoute, getLatLong, getDirections } = useContext(RouteContext)
+    const { deleteRoute, getRouteById, updateRoute, getRoutePath} = useContext(RouteContext)
 
     // state variable that will contain traffic incidents for a certain route
     const [incidentsToPost, setIncidentsToPost] = useState([])
@@ -26,9 +26,9 @@ export const RouteCard = ({ routeObj }) => {
     // TRAFFIC INFO
 
     const handleCheckTrafficClick = (event) => {
-        // Gets incident data from API and sets incidents equal to an array of incident objects
+        // Gets incident data from API and sets incidents equal to the response object
         getIncidentAndLocation(routeObj.origin, routeObj.destination)
-            .then((res) => {
+            .then(() => {
                 // Sets eventId equal to event.target.id (id of the route where the button was clicked)
                 setEventId(parseInt(event.target.id))
             })
@@ -53,8 +53,8 @@ export const RouteCard = ({ routeObj }) => {
     }
 
     useEffect(() => {
-        // When incidents variable changes, incidentsToPost is set equal to incidents
-        setIncidentsToPost(incidents.TRAFFICITEMS?.TRAFFICITEM)
+        // When incidents variable changes, incidentsToPost is set equal to an array incident objects
+        setIncidentsToPost(incidents?.TRAFFICITEMS?.TRAFFICITEM)
     }, [incidents])
 
     useEffect(() => {
@@ -96,7 +96,7 @@ export const RouteCard = ({ routeObj }) => {
 
     useEffect(() => {
         // Checks to see if the route is at least 15 characters long; allows the user to save the route even if they don't make changes
-        if (routeToEdit.origin?.length > 15 && routeToEdit.origin?.length > 15) {
+        if (routeToEdit.origin?.length > 15 && routeToEdit.destination?.length > 15) {
             setIsComplete(true)
         } else {
             setIsComplete(false)
@@ -115,7 +115,7 @@ export const RouteCard = ({ routeObj }) => {
             {/* Checks to see if editClicked is true */}
             {editClicked ?
                 <>
-                    {/* If true, display inout field/textarea fields containing route name, origin, and destination that the user can change */}
+                    {/* IF TRUE, display inout field/textarea fields containing route name, origin, and destination that the user can change */}
                     <input id={"name"} type="text" value={routeToEdit.name} onChange={event => handleChangeInput(event)}></input>
                     <div>
                         <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
@@ -128,8 +128,9 @@ export const RouteCard = ({ routeObj }) => {
                         {path.join(" to ")}
                     </div>
                 </>
-                // If false, just display the route name as a header
+                // IF FALSE, just display the route name as a header
                 : <h3>{routeObj.name}</h3>}
+
             {/* Check Traffic Button */}
             {<button id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</button>}
 

@@ -1,6 +1,6 @@
 // Returns an array of just street names that the user will follow during their drive
+
 export const getRouteStreetNames = (route) => {
-    console.log("turn by turn",route.routes[0].sections[0].turnByTurnActions)
     // route.routes[0].sections[0].turnByTurnActions is an array of action objects like arrive, turn, continue
     const turnByTurnDirections = route.routes[0].sections[0].turnByTurnActions
 
@@ -20,5 +20,5 @@ export const getRouteStreetNames = (route) => {
     // Creates a new set of street names where each street is only listed once; removes actions like "continue"
     const finalStreetNamesWithoutDuplicates = [... new Set(finalStreetNames)]
 
-    return finalStreetNames
+    return finalStreetNamesWithoutDuplicates
 }

@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react"
+import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 
 export const RouteContext = createContext()
 
@@ -57,9 +58,28 @@ export const RouteProvider = (props) => {
             .then(getRoutes)
     }
 
+    const getRoutePath = (origin, destination) => {
+        let originLatLong = {}
+        let destinationLatLong = {}
+        return getLatLong(origin)
+            .then(res => {
+                // res.items[0].position is an object containing lat and long as key value pairs
+                return originLatLong = res.items[0].position
+            })
+            .then(() => getLatLong(destination))
+            .then(res => {
+                // changes empty object variable equal to an object containing lat/long pair
+                return destinationLatLong = res.items[0].position
+            })
+            // Returns turn by turn directions from origin to destination
+            .then(() => getDirections(originLatLong, destinationLatLong))
+            // Returns an array of strings, where wach string is the next street a user should take 
+            .then(directions => getRouteStreetNames(directions))
+    }
+
     return (
         <RouteContext.Provider value={{
-            getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById, deleteRoute, updateRoute
+            getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById, deleteRoute, updateRoute, getRoutePath
         }}>
             {props.children}
         </RouteContext.Provider>

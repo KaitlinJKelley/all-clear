@@ -7,19 +7,13 @@ import { TrafficContext } from "./TrafficProvider"
 
 export const RouteForms = () => {
     // imports functions to be used in this component
-    const { getLatLong, getDirections, addNewRoute, getRoutes } = useContext(RouteContext)
-    const { getRoutePath } = useContext(TrafficContext)
+    const { addNewRoute, getRoutes, getRoutePath } = useContext(RouteContext)
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
-    const [path, setPath] = useState([])
+    const [path, setPath] = useState(["Don't forget to check your path before clicking Save!"])
     // Will be used to save route to database
-    const [route, setRoute] = useState({
-        name: "",
-        origin: "",
-        destination: "",
-        userId: 0
-    })
+    const [route, setRoute] = useState({})
     // Because an input field can't be matched to a route key, this state variable will be used until all fields are ready to setRoute
     const [options, setOptions] = useState({
         name: "",
@@ -51,16 +45,16 @@ export const RouteForms = () => {
 
     const handleSaveClick = () => {
         // debugger
-       addNewRoute(route)
-       setOptions({
+        addNewRoute(route)
+        setOptions({
             name: "",
             originStreet: "",
             originCSZ: "",
             destinationStreet: "",
             destinationCSZ: ""
-       })
-       setPath([])
-       setIsComplete(false)
+        })
+        setPath([])
+        setIsComplete(false)
     }
 
     useEffect(() => {
@@ -77,22 +71,7 @@ export const RouteForms = () => {
         setRoute(newRoute)
         // if all input fields are filled
         if (isComplete) {
-            // let originLatLong = {}
-            // let destinationLatLong = {}
-            // getLatLong(route.origin)
-            //     .then(res => {
-            //         // res.items[0].position is an object containing lat and long as key value pairs
-            //         return originLatLong = res.items[0].position
-            //     })
-            //     .then(() => getLatLong(route.destination))
-            //     .then(res => {
-            //         // changes empty object variable equal to an object containing lat/long pair
-            //         return destinationLatLong = res.items[0].position
-            //     })
-            //     // Returns turn by turn directions from origin to destination
-            //     .then(() => getDirections(originLatLong, destinationLatLong))
-            //     // Returns an array of strings, where wach string is the next street a user should take 
-            //     .then(directions => getRouteStreetNames(directions))
+
             getRoutePath(newRoute.origin, newRoute.destination)
                 // sets path state variable equal to array of street names to invoke re-render
                 .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
@@ -109,7 +88,7 @@ export const RouteForms = () => {
     return (
         <>
             <form className="newRoute__forms--origin">
-            <fieldset>
+                <fieldset>
                     <label htmlFor="name">Route Name (ex. Home to Work)</label>
                     <input type="text" name="name" value={options.name} onChange={event => handleInputChange(event)} required></input>
                 </fieldset>
@@ -144,9 +123,9 @@ export const RouteForms = () => {
                 {path.join(" to ")}
             </div>
             <button className="btn--saveRoute" type="submit"
-            // Button is disabled until isComplete equals true
-            // When the user clicks Save Route, invoke handleSaveClick
-            disabled={!isComplete} onClick={() => handleSaveClick()}>Save Route</button>
+                // Button is disabled until isComplete equals true
+                // When the user clicks Save Route, invoke handleSaveClick
+                disabled={!isComplete} onClick={() => handleSaveClick()}>Save Route</button>
         </>
     )
 }

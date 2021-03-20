@@ -11,24 +11,7 @@ export const TrafficProvider = (props) => {
     // imports functions to be used in this component
     const { getLatLong, getDirections } = useContext(RouteContext)
 
-    const getRoutePath = (origin, destination) => {
-        let originLatLong = {}
-        let destinationLatLong = {}
-        return getLatLong(origin)
-            .then(res => {
-                // res.items[0].position is an object containing lat and long as key value pairs
-                return originLatLong = res.items[0].position
-            })
-            .then(() => getLatLong(destination))
-            .then(res => {
-                // changes empty object variable equal to an object containing lat/long pair
-                return destinationLatLong = res.items[0].position
-            })
-            // Returns turn by turn directions from origin to destination
-            .then(() => getDirections(originLatLong, destinationLatLong))
-            // Returns an array of strings, where wach string is the next street a user should take 
-            .then(directions => getRouteStreetNames(directions))
-    }
+    
 
     const getTrafficIncidentData = (latLongArray) => {
         // FixedLatLongString will contain a single string of all lat/long pairs, separated by semicolons
@@ -47,7 +30,6 @@ export const TrafficProvider = (props) => {
             })
             // sets incidents equal to data that was returned from fetch call
             .then(res => {
-                // debugger
                 console.log(res)
                 setIncidents(res)
             })
@@ -120,7 +102,7 @@ export const TrafficProvider = (props) => {
     }
     return (
         <TrafficContext.Provider value={{
-            getIncidentAndLocation, incidents, getRoutePath
+            getIncidentAndLocation, incidents
         }}>
             {props.children}
         </TrafficContext.Provider>
