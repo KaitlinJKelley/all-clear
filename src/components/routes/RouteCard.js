@@ -6,7 +6,7 @@ import { TrafficContext } from "./TrafficProvider"
 export const RouteCard = ({ routeObj }) => {
     const { getIncidentAndLocation, incidents } = useContext(TrafficContext)
 
-    const { deleteRoute, getRouteById, updateRoute, getRoutePath} = useContext(RouteContext)
+    const { deleteRoute, getRouteById, updateRoute, getRoutePath } = useContext(RouteContext)
 
     // state variable that will contain traffic incidents for a certain route
     const [incidentsToPost, setIncidentsToPost] = useState([])
@@ -39,12 +39,8 @@ export const RouteCard = ({ routeObj }) => {
         if (eventId === routeObj.id) {
             // If IncidentsToPost is not undefined
             if (incidentsToPost) {
-                // If there are any incidents
-                if (incidentsToPost.length > 0) {
-                    // returns the content message for each incident
-                    // debugger
-                    return <div>{incidentsToPost.map(incident => incident?.TRAFFICITEMDESCRIPTION[0].content)}</div>
-                }
+                // returns the content message for each incident
+                return <div>{incidentsToPost.map(incident => incident?.TRAFFICITEMDESCRIPTION[0].content)}</div>
             } else {
                 // Returns all clear message if there are no incident objects in the array
                 return <div>All clear! There are no incidents blocking your route</div>

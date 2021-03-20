@@ -26,20 +26,14 @@ export const RouteForms = () => {
     const handleInputChange = (event) => {
         // copy options object
         const newOptions = { ...options }
-        // for each key in the newOptions object
-        for (let option in newOptions) {
-            // if the current key being iterated over matches the name of the input field being filled
-            if (option === event.target.name) {
-                // change the value of that key to match the user's input
-                newOptions[option] = event.target.value
-                // set state so the DOM re-renders with updated info
-                setOptions(newOptions)
-            }
-            // If none of the values in the newOptions object are empty strings
-            if (Object.values(newOptions).includes("") === false) {
-                // isComplete is true, which means all input fields are filled
-                setIsComplete(true)
-            }
+        // Go to the key that matches "name" and change the value of that key to match the user's input
+        newOptions[event.target.name] = event.target.value
+        // set state so the DOM re-renders with updated info
+        setOptions(newOptions)
+        // If none of the values in the newOptions object are empty strings
+        if (Object.values(newOptions).includes("") === false) {
+            // isComplete is true, which means all input fields are filled
+            setIsComplete(true)
         }
     }
 
@@ -78,12 +72,6 @@ export const RouteForms = () => {
         }
 
     }, [options])
-    // Invokes getRoutes when path variable changes
-    // This changes the state of the routes variable (in the RouteProvider) when a new route is saved, 
-    // so the RoutePage automatically updates with the new route
-    useEffect(() => {
-        getRoutes()
-    }, [path])
 
     return (
         <>
