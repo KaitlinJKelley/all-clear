@@ -40,6 +40,13 @@
       "destination": "138 S Central Ave Los Angeles, CA 90012",
       "userId": 3,
       "id": 5
+    },
+    {
+      "name": "Home To Work",
+      "origin": "1320 Blue Ridge Circle mobile al 36695",
+      "destination": "715 saint emanuel st mobile al 36603",
+      "userId": 1,
+      "id": 6
     }
   ]
 }

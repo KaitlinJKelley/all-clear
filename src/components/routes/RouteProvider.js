@@ -27,6 +27,7 @@ export const RouteProvider = (props) => {
             },
             body: JSON.stringify(routeObj)
         })
+        .then(getRoutes)
     }
     //set routes state variable equal to an array of all routes 
     const getRoutes = () => {
