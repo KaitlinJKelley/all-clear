@@ -40,7 +40,7 @@ export const RouteCard = ({ routeObj }) => {
             // If IncidentsToPost is not undefined
             if (incidentsToPost) {
                 // returns the content message for each incident
-                return <div>{incidentsToPost.map(incident => incident?.TRAFFICITEMDESCRIPTION[0].content)}</div>
+                return <div>{incidentsToPost.map(incident => <p key={Math.random()}>{ incident?.TRAFFICITEMDESCRIPTION[0].content}</p>)}</div>
             } else {
                 // Returns all clear message if there are no incident objects in the array
                 return <div>All clear! There are no incidents blocking your route</div>
@@ -120,8 +120,7 @@ export const RouteCard = ({ routeObj }) => {
                     </div>
                     <div className="newRoute__path">
                         <h3>Your Route Path</h3>
-                        {/* Use css white space pre-wrap to force line breaks? or display flex on div */}
-                        {path.join(" to ")}
+                        {path.map(name => <p key={Math.random()}>{name}</p>)}
                     </div>
                 </>
                 // IF FALSE, just display the route name as a header
