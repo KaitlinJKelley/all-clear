@@ -34,6 +34,9 @@ export const RouteForms = () => {
         if (Object.values(newOptions).includes("") === false) {
             // isComplete is true, which means all input fields are filled
             setIsComplete(true)
+        } else {
+            // Prevents app from breaking if a user completely backspaces after completing all fields
+            setIsComplete(false)
         }
     }
 
