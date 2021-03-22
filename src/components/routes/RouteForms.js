@@ -4,6 +4,10 @@ import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { userStorageKey } from "../auth/authSettings"
 import { RouteContext } from "./RouteProvider"
 import { TrafficContext } from "./TrafficProvider"
+import Form from 'react-bootstrap/Form';
+import FormGroup from 'react-bootstrap/Form';
+import { Card } from "react-bootstrap"
+import "./RouteForm.css"
 
 export const RouteForms = () => {
     // imports functions to be used in this component
@@ -78,45 +82,47 @@ export const RouteForms = () => {
 
     return (
         <>
-            <form className="newRoute__forms--origin">
                 <fieldset>
-                    <label htmlFor="name">Route Name (ex. Home to Work)</label>
-                    <input type="text" name="name" value={options.name} onChange={event => handleInputChange(event)} required></input>
+                    {/* <Form.Label htmlFor="name">Route Name (ex. Home to Work)</Form.Label> */}
+                    <Form.Control type="text" name="name" value={options.name} placeholder = "Route Name (ex. Home to Work)" onChange={event => handleInputChange(event)} required></Form.Control>
                 </fieldset>
+            <div className="newRoute__forms">
+            <Form className="newRoute__forms--origin">
                 <legend>Origin</legend>
                 <fieldset>
                     <label htmlFor="originStreet">Street</label>
-                    <input type="text" name="originStreet" value={options.originStreet} onChange={event => handleInputChange(event)} required></input>
+                    <Form.Control type="text" name="originStreet" value={options.originStreet} onChange={event => handleInputChange(event)} required></Form.Control>
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="originCSZ">City, State Zip</label>
-                    <input type="text" name="originCSZ" value={options.originCSZ} onChange={event => handleInputChange(event)} required></input>
+                    <Form.Control type="text" name="originCSZ" value={options.originCSZ} onChange={event => handleInputChange(event)} required></Form.Control>
                 </fieldset>
 
-            </form>
+            </Form>
 
-            <form className="newRoute__forms--destination">
+            <Form className="newRoute__forms--destination">
                 <legend>Destination</legend>
                 <fieldset>
                     <label htmlFor="destinationStreet">Street</label>
-                    <input type="text" name="destinationStreet" value={options.destinationStreet} onChange={event => handleInputChange(event)} required></input>
+                    <Form.Control type="text" name="destinationStreet" value={options.destinationStreet} onChange={event => handleInputChange(event)} required></Form.Control>
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="destinationCSZ">City, State Zip</label>
-                    <input type="text" name="destinationCSZ" value={options.destinationCSZ} onChange={event => handleInputChange(event)} required></input>
+                    <Form.Control type="text" name="destinationCSZ" value={options.destinationCSZ} onChange={event => handleInputChange(event)} required></Form.Control>
                 </fieldset>
 
-            </form>
+            </Form>
+            </div>
             <div className="newRoute__path">
-                <h3>Your Route Path</h3>
+                <Card.Title>Your Route Path</Card.Title>
                 {path.join(" to ")}
             </div>
             <button className="btn--saveRoute" type="submit"
                 // Button is disabled until isComplete equals true
                 // When the user clicks Save Route, invoke handleSaveClick
-                disabled={!isComplete} onClick={() => handleSaveClick()}>Save Route</button>
+                disabled={!isComplete} className="save button" onClick={() => handleSaveClick()}>Save Route</button>
         </>
     )
 }

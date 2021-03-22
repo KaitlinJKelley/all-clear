@@ -5,6 +5,7 @@ import { userStorageKey } from "../auth/authSettings"
 import { RouteCard } from "./RouteCard"
 import { RouteForms } from "./RouteForms"
 import { RouteContext } from "./RouteProvider"
+import "./RoutePage.css"
 
 export const RoutePage = () => {
     // imports routes state variable and getRoutes function
@@ -50,7 +51,7 @@ export const RoutePage = () => {
             </section>
             <div className="newRoute">
                 <h2>New Route</h2>
-                <div className="newRoute__forms">
+                <div className="newRoute__content">
                     {/* Invoke RouteForm component to render New Route form to DOM */}
                     <RouteForms />
                 </div>

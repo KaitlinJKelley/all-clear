@@ -2,6 +2,10 @@ import React, { useContext, useEffect, useState } from "react"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { RouteContext } from "./RouteProvider"
 import { TrafficContext } from "./TrafficProvider"
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import {ButtonGroup} from 'react-bootstrap';
+import "./RouteCard.css"
 
 export const RouteCard = ({ routeObj }) => {
     const { getIncidentAndLocation, incidents } = useContext(TrafficContext)
@@ -40,10 +44,10 @@ export const RouteCard = ({ routeObj }) => {
             // If IncidentsToPost is not undefined
             if (incidentsToPost) {
                 // returns the content message for each incident
-                return <div>{incidentsToPost.map(incident => <p key={Math.random()}>{ incident?.TRAFFICITEMDESCRIPTION[0].content}</p>)}</div>
+                return <div>{incidentsToPost.map(incident => <Card.Text key={Math.random()}>{ incident?.TRAFFICITEMDESCRIPTION[0].content}</Card.Text>)}</div>
             } else {
                 // Returns all clear message if there are no incident objects in the array
-                return <div>All clear! There are no incidents blocking your route</div>
+                return <Card.Text>All clear! There are no incidents blocking your route</Card.Text>
             }
         }
     }
@@ -107,7 +111,7 @@ export const RouteCard = ({ routeObj }) => {
     }
 
     return (
-        <article>
+        <Card className="savedRoutes__cards--routeCard">
             {/* Checks to see if editClicked is true */}
             {editClicked ?
                 <>
@@ -116,28 +120,30 @@ export const RouteCard = ({ routeObj }) => {
                     <div>
                         <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
                         <textarea id={"destination"} type="text" value={routeToEdit.destination} onChange={event => handleChangeInput(event)}></textarea>
-                        <button onClick={() => handleViewPathClick()}>View Route Path</button>
                     </div>
-                    <div className="newRoute__path">
+                    <Card.Body className="newRoute__path">
                         <h3>Your Route Path</h3>
-                        {path.map(name => <p key={Math.random()}>{name}</p>)}
-                    </div>
+                        <Button className="route button" onClick={() => handleViewPathClick()}>View Route Path</Button>
+                        {path.map(name => <Card.Text key={Math.random()}>{name}</Card.Text>)}
+                    </Card.Body>
                 </>
                 // IF FALSE, just display the route name as a header
-                : <h3>{routeObj.name}</h3>}
+                : <Card.Title>{routeObj.name}</Card.Title>}
 
             {/* Check Traffic Button */}
-            {<button id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</button>}
-
             {messageToPost}
+            {<Button className="traffic button" id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</Button>}
+
             {/* Checks to see if editClicked is true */}
+            <ButtonGroup aria-label="First group">
             {editClicked ?
                 // If true, display a Save button; disabled when any field is incomplete 
-                <button className="button btn--save" disabled={!isComplete} onClick={() => { handleSaveClick(); setEditClicked(false) }} id={`${routeObj.id}`}>Save Changes</button>
+                <Button className="save button" disabled={!isComplete} onClick={() => { handleSaveClick(); setEditClicked(false) }} id={`${routeObj.id}`}>Save Changes</Button>
                 // If false, display Edit button
-                : <button className="button btn--edit" onClick={() => { handleEditClick(); setEditClicked(true) }} id={`${routeObj.id}`}>Edit</button>}
+                : <Button className="edit button" onClick={() => { handleEditClick(); setEditClicked(true) }} id={`${routeObj.id}`}>Edit</Button>}
             {/* Delete button */}
-            <button onClick={() => handleDeleteClick()}>Delete Route</button>
-        </article>
+            <Button className ="delete button" onClick={() => handleDeleteClick()}>Delete Route</Button>
+            </ButtonGroup>
+        </Card>
     )
 }

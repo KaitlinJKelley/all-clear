@@ -1,0 +1,7 @@
+.savedRoutes {
+    border: thin solid black;
+}
+.savedRoutes__cards {
+    display: flex;
+    flex-wrap: wrap;   
+}
