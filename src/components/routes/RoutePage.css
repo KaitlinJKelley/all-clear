@@ -1,0 +1,28 @@
+.savedRoutes {
+    background-color: whitesmoke;
+    border: thin solid rgb(145,163,176);
+}
+.savedRoutes__cards {
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+.recheckMessage {
+    text-align: center;
+    font-style: italic;
+}
+
+.newRoute__content {
+    text-align: center;
+}
+
+.logout {
+    position: absolute;
+    right: 10px;
+    transform: translateY(-200%);
+}
+
+h1 {
+    text-align: center;
+    font-size: 5em;
+}

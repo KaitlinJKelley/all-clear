@@ -5,6 +5,7 @@ import { userStorageKey } from "../auth/authSettings"
 import { RouteCard } from "./RouteCard"
 import { RouteForms } from "./RouteForms"
 import { RouteContext } from "./RouteProvider"
+import "./RoutePage.css"
 
 export const RoutePage = () => {
     // imports routes state variable and getRoutes function
@@ -38,9 +39,10 @@ export const RoutePage = () => {
     return (
         <>
             <h1>Checkpoint</h1>
-            <button className="btn--logout" onClick={() => handleLogout()}>Logout</button>
+            <button className="logout" onClick={() => handleLogout()}>Logout</button>
             <section className="savedRoutes">
                 <h2>Saved Routes</h2>
+                <p className="recheckMessage">Traffic Incidents are updated repiodically, so you may need to Check Traffic again if you're logged in for an extended period</p>
                 <div className="savedRoutes__cards">
                     {userRoutes.map(route => {
                         // Invokes RouteCard for every userRoute
@@ -50,7 +52,7 @@ export const RoutePage = () => {
             </section>
             <div className="newRoute">
                 <h2>New Route</h2>
-                <div className="newRoute__forms">
+                <div className="newRoute__content">
                     {/* Invoke RouteForm component to render New Route form to DOM */}
                     <RouteForms />
                 </div>

@@ -1,0 +1,39 @@
+
+.newRoute{
+    background-color: whitesmoke;
+    border: thin solid rgb(145,163,176);
+    margin-top: 2%;
+}
+
+.newRoute__forms--title {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 1%;
+}
+
+.newRoute__forms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.formsAndInput {
+    background-color: cornsilk;
+    padding-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.totalForm {
+    background-color: cornsilk;
+    padding: 2%;
+}
+
+.newRoute__forms--origin, .newRoute__forms--destination {
+    flex-basis: 40%;
+    margin-bottom: 3%;  
+}
+
+input {
+    text-align: center;
+}
