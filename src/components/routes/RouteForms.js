@@ -82,38 +82,40 @@ export const RouteForms = () => {
 
     return (
         <>
-                <fieldset>
-                    {/* <Form.Label htmlFor="name">Route Name (ex. Home to Work)</Form.Label> */}
-                    <Form.Control type="text" name="name" value={options.name} placeholder = "Route Name (ex. Home to Work)" onChange={event => handleInputChange(event)} required></Form.Control>
-                </fieldset>
+            <div className="formsAndInput">
+            <fieldset className="newRoute__forms--title">
+            <legend>Route Name</legend>
+                <Form.Control type="text" name="name" value={options.name} placeholder="Route Name (ex. Home to Work)" onChange={event => handleInputChange(event)} required></Form.Control>
+            </fieldset>
             <div className="newRoute__forms">
-            <Form className="newRoute__forms--origin">
-                <legend>Origin</legend>
-                <fieldset>
-                    <label htmlFor="originStreet">Street</label>
-                    <Form.Control type="text" name="originStreet" value={options.originStreet} onChange={event => handleInputChange(event)} required></Form.Control>
-                </fieldset>
+                <Form className="newRoute__forms--origin">
+                    <legend>Origin</legend>
+                    <fieldset>
+                        {/* <label htmlFor="originStreet"></label> */}
+                        <Form.Control placeholder="Street" type="text" name="originStreet" value={options.originStreet} onChange={event => handleInputChange(event)} required></Form.Control>
+                    </fieldset>
 
-                <fieldset>
-                    <label htmlFor="originCSZ">City, State Zip</label>
-                    <Form.Control type="text" name="originCSZ" value={options.originCSZ} onChange={event => handleInputChange(event)} required></Form.Control>
-                </fieldset>
+                    <fieldset>
+                        <label htmlFor="originCSZ"></label>
+                        <Form.Control placeholder="City, State Zip" type="text" name="originCSZ" value={options.originCSZ} onChange={event => handleInputChange(event)} required></Form.Control>
+                    </fieldset>
 
-            </Form>
+                </Form>
 
-            <Form className="newRoute__forms--destination">
-                <legend>Destination</legend>
-                <fieldset>
-                    <label htmlFor="destinationStreet">Street</label>
-                    <Form.Control type="text" name="destinationStreet" value={options.destinationStreet} onChange={event => handleInputChange(event)} required></Form.Control>
-                </fieldset>
+                <Form className="newRoute__forms--destination">
+                    <legend>Destination</legend>
+                    <fieldset>
+                        {/* <label htmlFor="destinationStreet"></label> */}
+                        <Form.Control placeholder="Street" type="text" name="destinationStreet" value={options.destinationStreet} onChange={event => handleInputChange(event)} required></Form.Control>
+                    </fieldset>
 
-                <fieldset>
-                    <label htmlFor="destinationCSZ">City, State Zip</label>
-                    <Form.Control type="text" name="destinationCSZ" value={options.destinationCSZ} onChange={event => handleInputChange(event)} required></Form.Control>
-                </fieldset>
+                    <fieldset>
+                        <label htmlFor="destinationCSZ"></label>
+                        <Form.Control placeholder="City, State Zip" type="text" name="destinationCSZ" value={options.destinationCSZ} onChange={event => handleInputChange(event)} required></Form.Control>
+                    </fieldset>
 
-            </Form>
+                </Form>
+            </div>
             </div>
             <div className="newRoute__path">
                 <Card.Title>Your Route Path</Card.Title>

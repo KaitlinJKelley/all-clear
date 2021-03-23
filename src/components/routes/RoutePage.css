@@ -1,7 +1,22 @@
 .savedRoutes {
-    border: thin solid black;
+    background-color: whitesmoke;
+    border: thin solid rgb(145,163,176);
 }
 .savedRoutes__cards {
     display: flex;
-    flex-wrap: wrap;   
+    flex-wrap: wrap; 
+}
+
+.newRoute__content {
+    text-align: center;
+}
+
+.logout {
+    position: absolute;
+    right: 10px;
+    transform: translateY(-200%);
+}
+
+h1 {
+    text-align: center;
 }

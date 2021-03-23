@@ -39,7 +39,7 @@ export const RoutePage = () => {
     return (
         <>
             <h1>Checkpoint</h1>
-            <button className="btn--logout" onClick={() => handleLogout()}>Logout</button>
+            <button className="logout" onClick={() => handleLogout()}>Logout</button>
             <section className="savedRoutes">
                 <h2>Saved Routes</h2>
                 <div className="savedRoutes__cards">

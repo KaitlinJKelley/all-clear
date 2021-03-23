@@ -1,5 +1,9 @@
 .savedRoutes__cards--routeCard {
     flex-basis: 25%;
     margin: 2%;
+    padding: 1%;
 }
 
+.card-title {
+    text-align: center;
+}
