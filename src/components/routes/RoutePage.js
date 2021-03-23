@@ -42,6 +42,7 @@ export const RoutePage = () => {
             <button className="logout" onClick={() => handleLogout()}>Logout</button>
             <section className="savedRoutes">
                 <h2>Saved Routes</h2>
+                <p className="recheckMessage">Traffic Incidents are updated repiodically, so you may need to Check Traffic again if you're logged in for an extended period</p>
                 <div className="savedRoutes__cards">
                     {userRoutes.map(route => {
                         // Invokes RouteCard for every userRoute

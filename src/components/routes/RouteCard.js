@@ -120,19 +120,21 @@ export const RouteCard = ({ routeObj }) => {
             {editClicked ?
                 <>
                     {/* IF TRUE, display inout field/textarea fields containing route name, origin, and destination that the user can change */}
-                    <legend>Route Name</legend>
-                    <input id={"name"} type="text" value={routeToEdit.name} onChange={event => handleChangeInput(event)}></input>
-                    <div className="legends"><legend>Origin</legend><legend>Destination</legend></div>
-                    <div className="addressEditFields">
-                        {/* <legend>Origin</legend> */}
-                        <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
-                        {/* <legend>Destination</legend> */}
-                        <textarea id={"destination"} type="text" value={routeToEdit.destination} onChange={event => handleChangeInput(event)}></textarea>
+                    <div className="allEditFields">
+                        <legend>Route Name</legend>
+                        <input id={"name"} type="text" value={routeToEdit.name} onChange={event => handleChangeInput(event)}></input>
+                        <div className="legends"><legend>Origin</legend><legend>Destination</legend></div>
+                        <div className="addressEditFields">
+                            {/* <legend>Origin</legend> */}
+                            <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
+                            {/* <legend>Destination</legend> */}
+                            <textarea id={"destination"} type="text" value={routeToEdit.destination} onChange={event => handleChangeInput(event)}></textarea>
+                        </div>
                     </div>
                     <Card.Body className="newRoute__path">
                         <h3>Your Route Path</h3>
+                        <p className="editedRoutePath">{path.join(" to ")}</p>
                         <Button className="route button" onClick={() => handleViewPathClick()}>View Route Path</Button>
-                        {path.map(name => <Card.Text key={Math.random()}>{name}</Card.Text>)}
                     </Card.Body>
                 </>
                 // IF FALSE, just display the route name as a header
@@ -141,8 +143,8 @@ export const RouteCard = ({ routeObj }) => {
             {/* Check Traffic Button */}
             {editClicked ? "" :
                 <>
-                {messageToPost}
-                <Button className="traffic button" id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</Button>
+                    {messageToPost}
+                    <Button className="traffic button" id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</Button>
                 </>
             }
 

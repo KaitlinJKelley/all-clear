@@ -13,14 +13,40 @@
     padding: 2%;
 }
 
+.allEditFields {
+    border: thin solid black;
+    padding:2%;
+    background-color: cornsilk;
+}
+
+#name {
+    width: 100%;
+}
+
 .addressEditFields, .legends {
     display: flex;
+}
+
+#origin {
+    margin-right: 1%;
+}
+
+#destination {
+    margin-left: 1%;
 }
 
 legend {
     text-align: center;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.newRoute__path {
+    text-align: center;
+}
+
+.editedRoutePath {
+    text-align: left;
 }
 
 .edit, .route {
