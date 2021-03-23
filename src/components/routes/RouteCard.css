@@ -7,3 +7,49 @@
 .card-title {
     text-align: center;
 }
+
+.incidentMessage {
+    border: thin solid black;
+    padding: 2%;
+}
+
+.addressEditFields, .legends {
+    display: flex;
+}
+
+legend {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.edit, .route {
+    background-color: rgb(155,196,226);
+    color: black;
+  }
+  .edit:hover, .edit:focus, .route:hover, .route:focus { 
+    background-color: rgb(91,146,229); 
+    color: black; 
+  }
+  
+  .traffic {
+    background-color: rgb(253,253,150);
+    color: black;
+  }
+  .traffic:hover, .traffic:focus { 
+    background-color: rgb(240,225,48);
+    color: black;  
+  }
+  
+  .delete {
+    background-color: rgb(255,105,97);
+    color: black;
+  }
+  .delete:hover, .delete:focus { 
+    background-color: rgb(255,69,0);
+    color: black;  
+  }
+
+  h5 {
+      text-align: center;
+  }

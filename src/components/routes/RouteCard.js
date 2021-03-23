@@ -4,7 +4,8 @@ import { RouteContext } from "./RouteProvider"
 import { TrafficContext } from "./TrafficProvider"
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import {ButtonGroup} from 'react-bootstrap';
+import { ButtonGroup } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./RouteCard.css"
 
 export const RouteCard = ({ routeObj }) => {
@@ -44,10 +45,13 @@ export const RouteCard = ({ routeObj }) => {
             // If IncidentsToPost is not undefined
             if (incidentsToPost) {
                 // returns the content message for each incident
-                return <div>{incidentsToPost.map(incident => <Card.Text key={Math.random()}>{ incident?.TRAFFICITEMDESCRIPTION[0].content}</Card.Text>)}</div>
+                return (
+
+                    <div className="incidentMessage"><h5>Traffic Incidents</h5> {incidentsToPost.map(incident => <Card.Text key={Math.random()}>{incident?.TRAFFICITEMDESCRIPTION[0].content}</Card.Text>)}</div>
+                )
             } else {
                 // Returns all clear message if there are no incident objects in the array
-                return <Card.Text>All clear! There are no incidents blocking your route</Card.Text>
+                return <Card.Text className="incidentMessage">All clear! There are no incidents blocking your route</Card.Text>
             }
         }
     }
@@ -116,9 +120,13 @@ export const RouteCard = ({ routeObj }) => {
             {editClicked ?
                 <>
                     {/* IF TRUE, display inout field/textarea fields containing route name, origin, and destination that the user can change */}
+                    <legend>Route Name</legend>
                     <input id={"name"} type="text" value={routeToEdit.name} onChange={event => handleChangeInput(event)}></input>
-                    <div>
+                    <div className="legends"><legend>Origin</legend><legend>Destination</legend></div>
+                    <div className="addressEditFields">
+                        {/* <legend>Origin</legend> */}
                         <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
+                        {/* <legend>Destination</legend> */}
                         <textarea id={"destination"} type="text" value={routeToEdit.destination} onChange={event => handleChangeInput(event)}></textarea>
                     </div>
                     <Card.Body className="newRoute__path">
@@ -131,18 +139,22 @@ export const RouteCard = ({ routeObj }) => {
                 : <Card.Title>{routeObj.name}</Card.Title>}
 
             {/* Check Traffic Button */}
-            {messageToPost}
-            {<Button className="traffic button" id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</Button>}
+            {editClicked ? "" :
+                <>
+                {messageToPost}
+                <Button className="traffic button" id={routeObj.id} onClick={(event) => { handleCheckTrafficClick(event) }}>Check Traffic</Button>
+                </>
+            }
 
             {/* Checks to see if editClicked is true */}
             <ButtonGroup aria-label="First group">
-            {editClicked ?
-                // If true, display a Save button; disabled when any field is incomplete 
-                <Button className="save button" disabled={!isComplete} onClick={() => { handleSaveClick(); setEditClicked(false) }} id={`${routeObj.id}`}>Save Changes</Button>
-                // If false, display Edit button
-                : <Button className="edit button" onClick={() => { handleEditClick(); setEditClicked(true) }} id={`${routeObj.id}`}>Edit</Button>}
-            {/* Delete button */}
-            <Button className ="delete button" onClick={() => handleDeleteClick()}>Delete Route</Button>
+                {editClicked ?
+                    // If true, display a Save button; disabled when any field is incomplete 
+                    <Button className="save button" disabled={!isComplete} onClick={() => { handleSaveClick(); setEditClicked(false) }} id={`${routeObj.id}`}>Save Changes</Button>
+                    // If false, display Edit button
+                    : <Button className="edit button" onClick={() => { handleEditClick(); setEditClicked(true) }} id={`${routeObj.id}`}>Edit</Button>}
+                {/* Delete button */}
+                <Button className="delete button" onClick={() => handleDeleteClick()}>Delete Route</Button>
             </ButtonGroup>
         </Card>
     )
