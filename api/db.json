@@ -49,5 +49,41 @@
       "id": 6
     }
   ],
-  "paths": []
+  "paths": [
+    {
+      "streetName": "Blue Ridge Cir US",
+      "latLong": "30.66187, -88.21339",
+      "routeId": 6,
+      "order": 1,
+      "id": 1
+    },
+    {
+      "streetName": "Carson Rd S US",
+      "latLong": "30.66138, -88.19896",
+      "routeId": 6,
+      "order": 2,
+      "id": 2
+    },
+    {
+      "streetName": "Wilderness Rd US",
+      "latLong": "30.66848, -88.17019",
+      "routeId": 6,
+      "order": 3,
+      "id": 3
+    },
+    {
+      "streetName": "Grelot Rd US",
+      "latLong": "30.66294, -88.16543",
+      "routeId": 6,
+      "order": 4,
+      "id": 4
+    },
+    {
+      "streetName": "University Blvd S US",
+      "latLong": "30.67369, -88.25017",
+      "routeId": 6,
+      "order": 5,
+      "id": 5
+    }
+  ]
 }
