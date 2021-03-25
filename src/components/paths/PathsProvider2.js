@@ -19,7 +19,7 @@ export const PathsProvider2 = (props) => {
 
             let arrayOfPromises = []
             let finalLatLong = []
-            let arrayOfPotentialStreetNames = []
+            let latLongStreetObjects = []
             let finalArrayOfStreetNames = []
             let origin = newRoute.origin
             let destination = newRoute.destination
@@ -73,7 +73,7 @@ export const PathsProvider2 = (props) => {
                     return Promise.all(arrayOfPromises)
                 })
                 .then(optionsArray => {
-                    console.log("optionsArray",optionsArray)
+                    console.log("optionsArray", optionsArray)
                     // optionsArray is an array of objects where each object contains an array of objects representing a potential street name
                     optionsArray.forEach(options => {
 
@@ -103,41 +103,65 @@ export const PathsProvider2 = (props) => {
 
                         if (optionsStreetNamesString.toLowerCase().includes(`${originCity}`) || optionsStreetNamesString.toLowerCase().includes(`${destinationCity}`)) {
                             // Put .find inside .map to return first instance of street name!!!
-                            options.items.map(item => item.title.toLowerCase().includes(`${originCity}`) ||
-                                item.title.toLowerCase().includes(`${destinationCity}`) ? finalLatLong.push(item.title) : item)
+                            // options.items.map(item => item.title.toLowerCase().includes(`${originCity}`) ||
+                            //     item.title.toLowerCase().includes(`${destinationCity}`) ? finalLatLong.push(item.title) : item)
+                            // debugger
+                            latLongStreetObjects.push(options.items.find(item => item.title.toLowerCase().includes(`${originCity}`) || item.title.toLowerCase().includes(`${destinationCity}`)))
                         } else {
-                            finalLatLong.push(" ")
+                            latLongStreetObjects.push(" ")
                         }
                     })
                 })
                 .then(() => {
+                    // debugger
+                    latLongStreetObjects.map(item => item === " " ? finalLatLong.push("") : finalLatLong.push(Object.values(item.position)))
+
                     console.log("finalLatLong", finalLatLong)
                     console.log("finalArrayOfStreetNames", finalArrayOfStreetNames)
-                    // for (let i = 0; i < finalLatLong.length; i++) {
-                    //     const [destructuredLat, destructuredLong] = finalLatLong[i]
-                    //     const newRoutePath = {
-                    //         streetName: finalArrayOfStreetNames[i],
-                    //         latLong: destructuredLat + ", " + destructuredLong,
-                    //         routeId: newRoute.id,
-                    //         order: i + 1
-                    //     }
-                    //     // debugger
-                    //     postRoutePath(newRoutePath)
-                    // }
+                    for (let i = 0; i < finalLatLong.length; i++) {
+                        if (finalLatLong[i] === "") {
+                            const newRoutePath = {
+                                streetName: finalArrayOfStreetNames[i],
+                                latLong: finalLatLong[i],
+                                routeId: newRoute.id,
+                                order: i + 1
+                            }
+                            postRoutePath(newRoutePath)
+                        } else {
+
+                            const [destructuredLat, destructuredLong] = finalLatLong[i]
+                            const newRoutePath = {
+                                streetName: finalArrayOfStreetNames[i],
+                                latLong: destructuredLat + ", " + destructuredLong,
+                                routeId: newRoute.id,
+                                order: i + 1
+                            }
+                            // debugger
+                            postRoutePath(newRoutePath)
+                            
+                        }
+                    }
                 })
         }
     }, [newRoute])
 
+    const timer = ms => new Promise(res => {
+        setTimeout(res, ms)
+        console.log("timed")
+    })
 
-    const postRoutePath = (routePathObj) => {
-        return fetch(`http://localhost:8088/paths`, {
+    const postRoutePath = async (routePathObj) => {
+        await timer(5000)
+        .then(() => {
+            return fetch(`http://localhost:8088/paths`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(routePathObj)
-        })
+        })})
     }
+
 
     return (
         <PathsContext.Provider value={{
