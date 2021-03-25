@@ -7,7 +7,7 @@ export const getRouteStreetNames = (route, originString) => {
 
     // Removes any action that doesn't contain a nextRoad value, because nextRoad conatins the street names that will be rendered
     // Removes things like depart, arrive, continue
-     const filteredStreetNames = turnByTurnDirections.filter(name => name.nextRoad !== undefined)
+    const filteredStreetNames = turnByTurnDirections.filter(name => name.nextRoad !== undefined)
 
     // Stores only the key/value pairs that start with "name" or "number"
     // const streetNames = filteredStreetNames.map((actionObj) => Object.fromEntries(Object.entries(actionObj.nextRoad).filter(([key, value]) => key.includes('name') || key.includes('number'))))
@@ -25,21 +25,26 @@ export const getRouteStreetNames = (route, originString) => {
 
     let finalSpecificStreetNames = []
     // debugger
-    if (originString) {
+    finalStreetNamesWithoutDuplicates.forEach(name => {
 
-        let splitOrigin = originString.split(" ")
-        let [originCity] = splitOrigin.splice(-3, 1)
-        
-        finalStreetNamesWithoutDuplicates.forEach(name => {
-            if (name.length < 9) {
-                finalSpecificStreetNames.push(name + " " +originCity)
-            } else {
-                finalSpecificStreetNames.push(name + " US")
-            }
-        })
-        
-        return finalSpecificStreetNames
-    } else {
-        return finalStreetNamesWithoutDuplicates
-    }
+        finalSpecificStreetNames.push(name + " US")
+    })
+    // if (originString) {
+
+    //     let splitOrigin = originString.split(" ")
+    //     let [originCity] = splitOrigin.splice(-3, 1)
+
+    //     finalStreetNamesWithoutDuplicates.forEach(name => {
+    //         if (name.length < 9) {
+    //             finalSpecificStreetNames.push(name + " " +originCity)
+    //         } else {
+    //             finalSpecificStreetNames.push(name + " US")
+    //         }
+    //     })
+
+    //     return finalSpecificStreetNames
+    // } else {
+    //     return finalStreetNamesWithoutDuplicates
+    // }
+    return finalSpecificStreetNames
 }

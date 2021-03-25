@@ -21,13 +21,6 @@
   ],
   "routes": [
     {
-      "name": "Home To New Orleans",
-      "origin": "1320 Blue Ridge Circle mobile al 36695",
-      "destination": "733 St Louis St New Orleans, LA 70130",
-      "userId": 1,
-      "id": 2
-    },
-    {
       "name": "Home to Grocery Store",
       "origin": "1620 Fulton Street  Brooklyn, NY 11213",
       "destination": "77 Green Acres Rd S Valley Stream, NY 11581",
@@ -40,6 +33,13 @@
       "destination": "138 S Central Ave Los Angeles, CA 90012",
       "userId": 3,
       "id": 5
+    },
+    {
+      "name": "Home to Kid's School",
+      "origin": "1320 Blue Ridge Circle mobile al 36695",
+      "destination": "2615 Longleaf Dr Mobile, AL 36693",
+      "userId": 1,
+      "id": 6
     }
   ],
   "paths": []
