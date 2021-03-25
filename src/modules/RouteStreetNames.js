@@ -8,13 +8,11 @@ export const getRouteStreetNames = (route, originString) => {
     // Removes any action that doesn't contain a nextRoad value, because nextRoad conatins the street names that will be rendered
     // Removes things like depart, arrive, continue
      const filteredStreetNames = turnByTurnDirections.filter(name => name.nextRoad !== undefined)
-     console.log("filteredStreetNames",filteredStreetNames)
 
     // Stores only the key/value pairs that start with "name" or "number"
     // const streetNames = filteredStreetNames.map((actionObj) => Object.fromEntries(Object.entries(actionObj.nextRoad).filter(([key, value]) => key.includes('name') || key.includes('number'))))
     const streetNames = []
     filteredStreetNames.forEach((actionObj) => actionObj.nextRoad.name ? streetNames.push(actionObj.nextRoad.name[0].value) : streetNames.push(actionObj.nextRoad.number[0].value))
-    console.log('streetNames: ', streetNames);
 
     // if the key is called "number", rename it to "name", so all properties are consistent
     // const consistentStreetNames = streetNames.map(nameObj => nameObj.number ? nameObj.name = nameObj.number : nameObj.name = nameObj.name)
@@ -26,18 +24,22 @@ export const getRouteStreetNames = (route, originString) => {
     let finalStreetNamesWithoutDuplicates = [... new Set(streetNames)]
 
     let finalSpecificStreetNames = []
+    // debugger
+    if (originString) {
 
-    console.log("originString",originString)
-    let splitOrigin = originString.split(" ")
-    let originCity = splitOrigin.splice(-3, 1)
-
-    finalStreetNamesWithoutDuplicates.forEach(name => {
-        if (name.length < 9) {
-            finalSpecificStreetNames.push(name + " " +originCity + " US")
-        } else {
-            finalSpecificStreetNames.push(name + " US")
-        }
-    })
-
-    return finalSpecificStreetNames
+        let splitOrigin = originString.split(" ")
+        let [originCity] = splitOrigin.splice(-3, 1)
+        
+        finalStreetNamesWithoutDuplicates.forEach(name => {
+            if (name.length < 9) {
+                finalSpecificStreetNames.push(name + " " +originCity)
+            } else {
+                finalSpecificStreetNames.push(name + " US")
+            }
+        })
+        
+        return finalSpecificStreetNames
+    } else {
+        return finalStreetNamesWithoutDuplicates
+    }
 }

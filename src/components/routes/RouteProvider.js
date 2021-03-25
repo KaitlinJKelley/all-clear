@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { PathsProvider } from "../paths/PathsProvider"
+import { PathsProvider2 } from "../paths/PathsProvider2"
 
 export const RouteContext = createContext()
 
@@ -33,7 +34,7 @@ export const RouteProvider = (props) => {
         .then(res => res.json())
         .then(setNewRoute)
         .then(getRoutes)
-        .then(() => <PathsProvider />)
+        .then(() => <PathsProvider2 />)
         // .then(setNewRoute({}))
         // .then(() => <PathsProvider />)
     }

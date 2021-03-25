@@ -6,6 +6,7 @@ import { RoutePage } from "./routes/RoutePage"
 import { RouteProvider } from "./routes/RouteProvider"
 import { TrafficProvider } from "./routes/TrafficProvider"
 import { PathsProvider } from "./paths/PathsProvider"
+import { PathsProvider2 } from "./paths/PathsProvider2"
 // debugger
 export const Checkpoint = () => {
   return (
@@ -17,11 +18,13 @@ export const Checkpoint = () => {
             <>
               <RouteProvider>
                 <TrafficProvider>
-                  <PathsProvider>
+                  {/* <PathsProvider> */}
+                  <PathsProvider2>
                     <Route exact path="/">
                       <RoutePage />
                     </Route>
-                  </PathsProvider>
+                  </PathsProvider2>
+                  {/* </PathsProvider> */}
                 </TrafficProvider>
               </RouteProvider>
             </>
