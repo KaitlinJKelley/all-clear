@@ -47,13 +47,6 @@
       "destination": "2615 Longleaf Dr Mobile, AL 36693",
       "userId": 1,
       "id": 7
-    },
-    {
-      "name": "Home To Work",
-      "origin": "4530 cypress shores dr mobile al 36695",
-      "destination": "715 saint emanuel st mobile al 36603",
-      "userId": 1,
-      "id": 8
     }
   ],
   "paths": [
@@ -294,69 +287,6 @@
       "routeId": 7,
       "order": 7,
       "id": 67
-    },
-    {
-      "streetName": "Cypress Shores Dr al",
-      "latLong": "30.59752, -88.13688",
-      "routeId": 8,
-      "order": 1,
-      "id": 68
-    },
-    {
-      "streetName": "Higgins Rd al",
-      "latLong": "30.59293, -88.13547",
-      "routeId": 8,
-      "order": 2,
-      "id": 69
-    },
-    {
-      "streetName": "Rangeline Rd al",
-      "latLong": "30.5972, -88.16134",
-      "routeId": 8,
-      "order": 3,
-      "id": 70
-    },
-    {
-      "streetName": "I-10 al",
-      "latLong": "30.69083, -88.02223",
-      "routeId": 8,
-      "order": 4,
-      "id": 71
-    },
-    {
-      "streetName": "S Franklin St al",
-      "latLong": "30.68866, -88.04559",
-      "routeId": 8,
-      "order": 5,
-      "id": 72
-    },
-    {
-      "streetName": "Maryland St al",
-      "latLong": "30.67276, -88.05086",
-      "routeId": 8,
-      "order": 6,
-      "id": 73
-    },
-    {
-      "streetName": "S Conception St al",
-      "latLong": "30.69011, -88.04229",
-      "routeId": 8,
-      "order": 7,
-      "id": 74
-    },
-    {
-      "streetName": "Texas St al",
-      "latLong": "30.67666, -88.04866",
-      "routeId": 8,
-      "order": 8,
-      "id": 75
-    },
-    {
-      "streetName": "St Emanuel St al",
-      "latLong": "30.69007, -88.04129",
-      "routeId": 8,
-      "order": 9,
-      "id": 76
     }
   ]
 }
