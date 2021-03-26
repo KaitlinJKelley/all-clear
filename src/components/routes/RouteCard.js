@@ -32,7 +32,7 @@ export const RouteCard = ({ routeObj }) => {
 
     const handleCheckTrafficClick = (event) => {
         // Gets incident data from API and sets incidents equal to the response object
-        getIncidentAndLocation(routeObj.origin, routeObj.destination)
+        getIncidentAndLocation(routeObj)
             .then(() => {
                 // Sets eventId equal to event.target.id (id of the route where the button was clicked)
                 setEventId(parseInt(event.target.id))

@@ -46,7 +46,7 @@ export const RouteProvider = (props) => {
     }
 
     const getRouteById = (routeObjId) => {
-        return fetch(`http://localhost:8088/routes/${routeObjId}`)
+        return fetch(`http://localhost:8088/routes/${routeObjId}?_embed=path`)
             .then(res => res.json())
     }
 

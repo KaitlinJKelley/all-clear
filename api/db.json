@@ -42,13 +42,6 @@
       "id": 5
     },
     {
-      "name": "Home To Work",
-      "origin": "1320 blue ridge circle mobile al 36695",
-      "destination": "715 saint emanuel st mobile al 36603",
-      "userId": 1,
-      "id": 6
-    },
-    {
       "name": "Home To Kid's School",
       "origin": "4530 cypress shores dr mobile al 36695",
       "destination": "2615 Longleaf Dr Mobile, AL 36693",
@@ -245,97 +238,6 @@
       "routeId": 5,
       "order": 15,
       "id": 47
-    },
-    {
-      "streetName": "Blue Ridge Cir al",
-      "latLong": "30.66222, -88.21261",
-      "routeId": 6,
-      "order": 1,
-      "id": 48
-    },
-    {
-      "streetName": "Carson Rd S al",
-      "latLong": "30.66187, -88.21339",
-      "routeId": 6,
-      "order": 2,
-      "id": 49
-    },
-    {
-      "streetName": "Wilderness Rd al",
-      "latLong": "30.66152, -88.21209",
-      "routeId": 6,
-      "order": 3,
-      "id": 50
-    },
-    {
-      "streetName": "Grelot Rd al",
-      "latLong": "30.66138, -88.19896",
-      "routeId": 6,
-      "order": 4,
-      "id": 51
-    },
-    {
-      "streetName": "University Blvd S al",
-      "latLong": "30.65667, -88.16127",
-      "routeId": 6,
-      "order": 5,
-      "id": 52
-    },
-    {
-      "streetName": "Airport Blvd al",
-      "latLong": "30.67603, -88.13806",
-      "routeId": 6,
-      "order": 6,
-      "id": 53
-    },
-    {
-      "streetName": "I-65 al",
-      "latLong": "30.71353, -88.12096",
-      "routeId": 6,
-      "order": 7,
-      "id": 54
-    },
-    {
-      "streetName": "I-10 al",
-      "latLong": "30.69083, -88.02223",
-      "routeId": 6,
-      "order": 8,
-      "id": 55
-    },
-    {
-      "streetName": "S Franklin St al",
-      "latLong": "30.68866, -88.04559",
-      "routeId": 6,
-      "order": 9,
-      "id": 56
-    },
-    {
-      "streetName": "Maryland St al",
-      "latLong": "30.67276, -88.05086",
-      "routeId": 6,
-      "order": 10,
-      "id": 57
-    },
-    {
-      "streetName": "S Conception St al",
-      "latLong": "30.69011, -88.04229",
-      "routeId": 6,
-      "order": 11,
-      "id": 58
-    },
-    {
-      "streetName": "Texas St al",
-      "latLong": "30.67666, -88.04866",
-      "routeId": 6,
-      "order": 12,
-      "id": 59
-    },
-    {
-      "streetName": "St Emanuel St al",
-      "latLong": "30.69007, -88.04129",
-      "routeId": 6,
-      "order": 13,
-      "id": 60
     },
     {
       "streetName": "Cypress Shores Dr al",
