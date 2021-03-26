@@ -66,12 +66,12 @@ export const TrafficProvider = (props) => {
                 const streetNamesArray = getRouteStreetNames(route)
                 // Formats the list of street names to be converted to lat/long pairs
                 const FormattedStreetNames = streetNamesArray.map(string => string.replaceAll(" ", "+"))
-
+                
                 // Maps the formatted street names and gets lat/long for each
                 arrayOfPromises = FormattedStreetNames.map(streetName => {
                     // Runs each street name string through the geocoder API to get the lat/long
                     return getLatLong(streetName)
-
+                    
                 })
                 // Waits for arrayOfPromises to return and then returns that result (the lat/long of each street name)
                 return Promise.all(arrayOfPromises)

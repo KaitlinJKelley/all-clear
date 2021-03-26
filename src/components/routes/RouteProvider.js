@@ -1,10 +1,15 @@
-import React, { createContext, useState } from "react"
+import React, { createContext, useEffect, useState } from "react"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
+import { PathsProvider } from "../paths/PathsProvider"
+import { PathsProvider2 } from "../paths/PathsProvider2"
 
 export const RouteContext = createContext()
 
 export const RouteProvider = (props) => {
     const [routes, setRoutes] = useState([])
+
+    const [newRoute, setNewRoute] = useState({})
+    const [routeToEditRoutePath, setRouteToEditRoutePath] = useState({})
 
     //  Use HERE GeoCoding and Search API to convert street addresses to lat/long pair
     const getLatLong = (address) => {
@@ -27,13 +32,17 @@ export const RouteProvider = (props) => {
             },
             body: JSON.stringify(routeObj)
         })
+        .then(res => res.json())
+        .then(setNewRoute)
         .then(getRoutes)
+        .then(() => <PathsProvider2 />)
+
     }
     //set routes state variable equal to an array of all routes 
     const getRoutes = () => {
         return fetch("http://localhost:8088/routes")
             .then(res => res.json())
-            .then(routes => setRoutes(routes))
+            .then(routesArray => setRoutes(routesArray))
     }
 
     const getRouteById = (routeObjId) => {
@@ -50,13 +59,14 @@ export const RouteProvider = (props) => {
 
     const updateRoute = routeObj => {
         return fetch(`http://localhost:8088/routes/${routeObj.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(routeObj)
+            method: "DELETE"
         })
-            .then(getRoutes)
+        .then(() => addNewRoute({
+            "name": routeObj.name,
+            "origin": routeObj.origin,
+            "destination": routeObj.destination,
+            "userId": routeObj.userId
+        }))
     }
 
     const getRoutePath = (origin, destination) => {
@@ -75,12 +85,12 @@ export const RouteProvider = (props) => {
             // Returns turn by turn directions from origin to destination
             .then(() => getDirections(originLatLong, destinationLatLong))
             // Returns an array of strings, where wach string is the next street a user should take 
-            .then(directions => getRouteStreetNames(directions))
+            .then(directions => getRouteStreetNames(directions, origin))
     }
 
     return (
         <RouteContext.Provider value={{
-            getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById, deleteRoute, updateRoute, getRoutePath
+            getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById, deleteRoute, updateRoute, getRoutePath, newRoute
         }}>
             {props.children}
         </RouteContext.Provider>

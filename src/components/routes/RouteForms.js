@@ -15,7 +15,7 @@ export const RouteForms = () => {
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
-    const [path, setPath] = useState(["Don't forget to check your path before clicking Save!"])
+    const [visualPath, setVisualPath] = useState(["Don't forget to check your path before clicking Save!"])
     // Will be used to save route to database
     const [route, setRoute] = useState({})
     // Because an input field can't be matched to a route key, this state variable will be used until all fields are ready to setRoute
@@ -54,7 +54,7 @@ export const RouteForms = () => {
             destinationStreet: "",
             destinationCSZ: ""
         })
-        setPath([])
+        setVisualPath([])
         setIsComplete(false)
     }
 
@@ -72,10 +72,10 @@ export const RouteForms = () => {
         setRoute(newRoute)
         // if all input fields are filled
         if (isComplete) {
-
             getRoutePath(newRoute.origin, newRoute.destination)
-                // sets path state variable equal to array of street names to invoke re-render
-                .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
+                
+                // sets visualPath state variable equal to array of street names to invoke re-render
+                .then(arrayOfStreetNames => setVisualPath(arrayOfStreetNames))
         }
 
     }, [options])
@@ -83,43 +83,43 @@ export const RouteForms = () => {
     return (
         <>
             <div className="formsAndInput">
-            <fieldset className="newRoute__forms--title">
-            <legend>Route Name</legend>
-                <Form.Control type="text" name="name" value={options.name} placeholder="Route Name (ex. Home to Work)" onChange={event => handleInputChange(event)} required></Form.Control>
-            </fieldset>
-            <div className="newRoute__forms">
-                <Form className="newRoute__forms--origin">
-                    <legend>Origin</legend>
-                    <fieldset>
-                        {/* <label htmlFor="originStreet"></label> */}
-                        <Form.Control placeholder="Street" type="text" name="originStreet" value={options.originStreet} onChange={event => handleInputChange(event)} required></Form.Control>
-                    </fieldset>
+                <fieldset className="newRoute__forms--title">
+                    <legend>Route Name</legend>
+                    <Form.Control type="text" name="name" value={options.name} placeholder="Route Name (ex. Home to Work)" onChange={event => handleInputChange(event)} required></Form.Control>
+                </fieldset>
+                <div className="newRoute__forms">
+                    <Form className="newRoute__forms--origin">
+                        <legend>Origin</legend>
+                        <fieldset>
+                            {/* <label htmlFor="originStreet"></label> */}
+                            <Form.Control placeholder="Street" type="text" name="originStreet" value={options.originStreet} onChange={event => handleInputChange(event)} required></Form.Control>
+                        </fieldset>
 
-                    <fieldset>
-                        <label htmlFor="originCSZ"></label>
-                        <Form.Control placeholder="City, State Zip" type="text" name="originCSZ" value={options.originCSZ} onChange={event => handleInputChange(event)} required></Form.Control>
-                    </fieldset>
+                        <fieldset>
+                            <label htmlFor="originCSZ"></label>
+                            <Form.Control placeholder="City, State Zip" type="text" name="originCSZ" value={options.originCSZ} onChange={event => handleInputChange(event)} required></Form.Control>
+                        </fieldset>
 
-                </Form>
+                    </Form>
 
-                <Form className="newRoute__forms--destination">
-                    <legend>Destination</legend>
-                    <fieldset>
-                        {/* <label htmlFor="destinationStreet"></label> */}
-                        <Form.Control placeholder="Street" type="text" name="destinationStreet" value={options.destinationStreet} onChange={event => handleInputChange(event)} required></Form.Control>
-                    </fieldset>
+                    <Form className="newRoute__forms--destination">
+                        <legend>Destination</legend>
+                        <fieldset>
+                            {/* <label htmlFor="destinationStreet"></label> */}
+                            <Form.Control placeholder="Street" type="text" name="destinationStreet" value={options.destinationStreet} onChange={event => handleInputChange(event)} required></Form.Control>
+                        </fieldset>
 
-                    <fieldset>
-                        <label htmlFor="destinationCSZ"></label>
-                        <Form.Control placeholder="City, State Zip" type="text" name="destinationCSZ" value={options.destinationCSZ} onChange={event => handleInputChange(event)} required></Form.Control>
-                    </fieldset>
+                        <fieldset>
+                            <label htmlFor="destinationCSZ"></label>
+                            <Form.Control placeholder="City, State Zip" type="text" name="destinationCSZ" value={options.destinationCSZ} onChange={event => handleInputChange(event)} required></Form.Control>
+                        </fieldset>
 
-                </Form>
-            </div>
+                    </Form>
+                </div>
             </div>
             <div className="newRoute__path">
                 <Card.Title>Your Route Path</Card.Title>
-                {path.join(" to ")}
+                {visualPath.join(" to ")}
             </div>
             <button className="btn--saveRoute" type="submit"
                 // Button is disabled until isComplete equals true

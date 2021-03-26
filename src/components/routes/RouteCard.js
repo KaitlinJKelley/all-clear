@@ -26,7 +26,7 @@ export const RouteCard = ({ routeObj }) => {
     // Will be used to determine if all fields are complete
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
-    const [path, setPath] = useState([])
+    const [visualPath, setVisualPath] = useState([])
 
     // TRAFFIC INFO
 
@@ -94,8 +94,9 @@ export const RouteCard = ({ routeObj }) => {
         const newRouteToEdit = { ...routeToEdit }
         // returns an array of strings; each string is a street name
         getRoutePath(newRouteToEdit.origin, newRouteToEdit.destination)
+            
             // set path equal to the array of street names so the user can view the street names on their route
-            .then(arrayOfStreetNames => setPath(arrayOfStreetNames))
+            .then(arrayOfStreetNames => setVisualPath(arrayOfStreetNames))
     }
 
     useEffect(() => {
@@ -111,7 +112,7 @@ export const RouteCard = ({ routeObj }) => {
         // Update the route in the database to match the changed route
         updateRoute(routeToEdit)
         // sets path back to an empty array ro remove the route path from the card
-        setPath([])
+        setVisualPath([])
     }
 
     return (
@@ -133,7 +134,7 @@ export const RouteCard = ({ routeObj }) => {
                     </div>
                     <Card.Body className="newRoute__path">
                         <h3>Your Route Path</h3>
-                        <p className="editedRoutePath">{path.join(" to ")}</p>
+                        <p className="editedRoutePath">{visualPath.join(" to ")}</p>
                         <Button className="route button" onClick={() => handleViewPathClick()}>View Route Path</Button>
                     </Card.Body>
                 </>
