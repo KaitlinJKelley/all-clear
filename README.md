@@ -57,6 +57,7 @@ The current version of the app can only be used when origin and destination are 
 ### Future features could include:
 
 * Allow a user to choose between multiple route paths when they enter origin and destination
+* Implement secure user authentication
 * Implement auto traffic check that updates all routes on page load and then checks periodically as long as the app is open
 * Add icons that will display on the route to indicate types of incidents instead of full incident message
 * Add Details button that the user can click to display full incident message
