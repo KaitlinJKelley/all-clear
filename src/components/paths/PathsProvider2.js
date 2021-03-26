@@ -54,7 +54,7 @@ export const PathsProvider2 = (props) => {
                         // debugger
 
                         if (optionsStreetNamesString.toLowerCase().includes(`${originCity.toLowerCase()}`) || optionsStreetNamesString.toLowerCase().includes(`${destinationCity.toLowerCase()}`)) {
-                           
+
                             latLongStreetObjects.push(options.items.find(item => item.title.toLowerCase().includes(`${originCity.toLowerCase()}`) || item.title.toLowerCase().includes(`${destinationCity.toLowerCase()}`)))
                         } else {
                             latLongStreetObjects.push(" ")
@@ -89,7 +89,7 @@ export const PathsProvider2 = (props) => {
                             // debugger
                             postRoutePath(newRoutePath)
                             await timer(50)
-                            
+
                         }
                     }
                 })
@@ -102,20 +102,24 @@ export const PathsProvider2 = (props) => {
     })
 
     const postRoutePath = (routePathObj) => {
-            return fetch(`http://localhost:8088/paths`, {
+        return fetch(`http://localhost:8088/paths`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(routePathObj)
         })
-        .then(getRoutes)
+    }
+
+    const getPathByRouteId = (routeObj) => {
+        return fetch(`http://localhost:8088/paths?routeId=${routeObj.id}`)
+            .then(res => res.json())
     }
 
 
     return (
         <PathsContext.Provider value={{
-
+            getPathByRouteId
         }}>
             {props.children}
         </PathsContext.Provider>
