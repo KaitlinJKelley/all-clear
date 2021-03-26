@@ -5,7 +5,6 @@ import { userStorageKey } from "./auth/authSettings"
 import { RoutePage } from "./routes/RoutePage"
 import { RouteProvider } from "./routes/RouteProvider"
 import { TrafficProvider } from "./routes/TrafficProvider"
-import { PathsProvider } from "./paths/PathsProvider"
 import { PathsProvider2 } from "./paths/PathsProvider2"
 // debugger
 export const Checkpoint = () => {
@@ -17,15 +16,15 @@ export const Checkpoint = () => {
           return (
             <>
               <RouteProvider>
-                <TrafficProvider>
-                  {/* <PathsProvider> */}
-                  <PathsProvider2>
+                <PathsProvider2>
+                  <TrafficProvider>
+                    {/* <PathsProvider> */}
                     <Route exact path="/">
                       <RoutePage />
                     </Route>
-                  </PathsProvider2>
-                  {/* </PathsProvider> */}
-                </TrafficProvider>
+                    {/* </PathsProvider> */}
+                  </TrafficProvider>
+                </PathsProvider2>
               </RouteProvider>
             </>
           )

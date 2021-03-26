@@ -25,26 +25,32 @@ export const getRouteStreetNames = (route, originString) => {
 
     let finalSpecificStreetNames = []
     // debugger
-    finalStreetNamesWithoutDuplicates.forEach(name => {
 
-        finalSpecificStreetNames.push(name + " US")
-    })
-    // if (originString) {
+    if (originString) {
 
-    //     let splitOrigin = originString.split(" ")
-    //     let [originCity] = splitOrigin.splice(-3, 1)
+        let splitOrigin = originString.split(" ")
+        let [originState] = splitOrigin.splice(-2, 1)
+        console.log("originState", originState)
 
-    //     finalStreetNamesWithoutDuplicates.forEach(name => {
-    //         if (name.length < 9) {
-    //             finalSpecificStreetNames.push(name + " " +originCity)
-    //         } else {
-    //             finalSpecificStreetNames.push(name + " US")
-    //         }
-    //     })
+        finalStreetNamesWithoutDuplicates.forEach(name => {
+
+            finalSpecificStreetNames.push(name + " " + originState)
+        })
+        console.log("finalSpecificStreetNames", finalSpecificStreetNames)
+        return finalSpecificStreetNames
+
+        // finalStreetNamesWithoutDuplicates.forEach(name => {
+        //     if (name.length < 9) {
+        //         finalSpecificStreetNames.push(name + " " +originState)
+        //     } else {
+        //         finalSpecificStreetNames.push(name + " US")
+        //     }
+        // })
 
     //     return finalSpecificStreetNames
-    // } else {
-    //     return finalStreetNamesWithoutDuplicates
-    // }
-    return finalSpecificStreetNames
+    } else {
+        console.log("finalStreetNamesWithoutDuplicates", finalStreetNamesWithoutDuplicates)
+        return finalStreetNamesWithoutDuplicates
+    }
+    
 }

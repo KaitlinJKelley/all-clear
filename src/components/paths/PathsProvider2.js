@@ -53,9 +53,9 @@ export const PathsProvider2 = (props) => {
 
                         // debugger
 
-                        if (optionsStreetNamesString.toLowerCase().includes(`${originCity}`) || optionsStreetNamesString.toLowerCase().includes(`${destinationCity}`)) {
-
-                            latLongStreetObjects.push(options.items.find(item => item.title.toLowerCase().includes(`${originCity}`) || item.title.toLowerCase().includes(`${destinationCity}`)))
+                        if (optionsStreetNamesString.toLowerCase().includes(`${originCity.toLowerCase()}`) || optionsStreetNamesString.toLowerCase().includes(`${destinationCity.toLowerCase()}`)) {
+                           
+                            latLongStreetObjects.push(options.items.find(item => item.title.toLowerCase().includes(`${originCity.toLowerCase()}`) || item.title.toLowerCase().includes(`${destinationCity.toLowerCase()}`)))
                         } else {
                             latLongStreetObjects.push(" ")
                         }
@@ -76,7 +76,7 @@ export const PathsProvider2 = (props) => {
                                 order: i + 1
                             }
                             postRoutePath(newRoutePath)
-                            await timer(5000)
+                            await timer(50)
                         } else {
 
                             const [destructuredLat, destructuredLong] = finalLatLong[i]
@@ -88,8 +88,8 @@ export const PathsProvider2 = (props) => {
                             }
                             // debugger
                             postRoutePath(newRoutePath)
-                            await timer(2000)
-
+                            await timer(50)
+                            
                         }
                     }
                 })
@@ -102,7 +102,7 @@ export const PathsProvider2 = (props) => {
     })
 
     const postRoutePath = (routePathObj) => {
-        return fetch(`http://localhost:8088/paths`, {
+            return fetch(`http://localhost:8088/paths`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
