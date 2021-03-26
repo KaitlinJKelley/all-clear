@@ -5,7 +5,7 @@ export const PathsContext = createContext()
 
 export const PathsProvider2 = (props) => {
     console.log("PathsProvider ran")
-    const { getLatLong, getRoutePath, newRoute } = useContext(RouteContext)
+    const { getLatLong, getRoutePath, newRoute, getRoutes } = useContext(RouteContext)
     useEffect(() => {
 
         if (newRoute.origin) {
@@ -109,6 +109,7 @@ export const PathsProvider2 = (props) => {
             },
             body: JSON.stringify(routePathObj)
         })
+        .then(getRoutes)
     }
 
 

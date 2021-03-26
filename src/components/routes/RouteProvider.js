@@ -9,6 +9,7 @@ export const RouteProvider = (props) => {
     const [routes, setRoutes] = useState([])
 
     const [newRoute, setNewRoute] = useState({})
+    const [routeToEditRoutePath, setRouteToEditRoutePath] = useState({})
 
     //  Use HERE GeoCoding and Search API to convert street addresses to lat/long pair
     const getLatLong = (address) => {
@@ -58,13 +59,14 @@ export const RouteProvider = (props) => {
 
     const updateRoute = routeObj => {
         return fetch(`http://localhost:8088/routes/${routeObj.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(routeObj)
+            method: "DELETE"
         })
-            .then(getRoutes)
+        .then(() => addNewRoute({
+            "name": routeObj.name,
+            "origin": routeObj.origin,
+            "destination": routeObj.destination,
+            "userId": routeObj.userId
+        }))
     }
 
     const getRoutePath = (origin, destination) => {
