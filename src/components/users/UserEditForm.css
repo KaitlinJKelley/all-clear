@@ -1,0 +1,11 @@
+
+#modal {
+    border: 2px solid black;
+    background-color: cornsilk;
+   text-align: center;
+   padding: 2%;
+}
+
+#modal > button {
+    margin-top: 10%;
+}

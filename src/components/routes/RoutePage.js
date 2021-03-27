@@ -34,10 +34,11 @@ export const RoutePage = () => {
     const handleLogout = () => {
         sessionStorage.removeItem('app_user_id')
         history.push("/")
-      }
+    }
 
     return (
         <>
+            <button onClick={() => history.push("/edit-profile")}>Edit Profile Info</button>
             <h1>Checkpoint</h1>
             <button className="logout" onClick={() => handleLogout()}>Logout</button>
             <section className="savedRoutes">

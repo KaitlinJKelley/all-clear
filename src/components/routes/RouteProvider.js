@@ -91,6 +91,7 @@ export const RouteProvider = (props) => {
     return (
         <RouteContext.Provider value={{
             getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById, deleteRoute, updateRoute, getRoutePath, newRoute
+
         }}>
             {props.children}
         </RouteContext.Provider>
