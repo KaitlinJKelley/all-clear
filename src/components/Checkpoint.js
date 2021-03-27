@@ -6,6 +6,8 @@ import { RoutePage } from "./routes/RoutePage"
 import { RouteProvider } from "./routes/RouteProvider"
 import { TrafficProvider } from "./routes/TrafficProvider"
 import { PathsProvider2 } from "./paths/PathsProvider2"
+import { UserProvider } from "./users/UserProvider"
+import { UserEditForm } from "./users/UserEditForm"
 // debugger
 export const Checkpoint = () => {
   return (
@@ -15,6 +17,7 @@ export const Checkpoint = () => {
           // If the user is logged in
           return (
             <>
+            <UserProvider> 
               <RouteProvider>
                 <PathsProvider2>
                   <TrafficProvider>
@@ -22,10 +25,14 @@ export const Checkpoint = () => {
                     <Route exact path="/">
                       <RoutePage />
                     </Route>
+                    <Route exact path="/edit-profile">
+                      <UserEditForm />
+                    </Route>
                     {/* </PathsProvider> */}
                   </TrafficProvider>
                 </PathsProvider2>
               </RouteProvider>
+            </UserProvider>
             </>
           )
         } else {
