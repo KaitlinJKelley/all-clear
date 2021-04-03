@@ -17,7 +17,6 @@ export const PathsProvider = (props) => {
     }
 
     const getRoutePathByRouteId = (updatedRouteObj) => {
-        console.log("updated Object", updatedRouteObj)
         return fetch(`http://localhost:8088/paths?routeId=${updatedRouteObj.id}`)
             .then(res => {
                 res.json()
@@ -25,10 +24,6 @@ export const PathsProvider = (props) => {
     }
 
     const RoutePath = () => {
-        debugger
-        console.log("PathsProvider ran")
-
-        // useEffect(() => {
 
         if (newRoute.origin) {
 

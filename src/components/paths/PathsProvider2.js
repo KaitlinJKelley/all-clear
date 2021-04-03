@@ -4,7 +4,6 @@ import { RouteContext } from "../routes/RouteProvider"
 export const PathsContext = createContext()
 
 export const PathsProvider2 = (props) => {
-    console.log("PathsProvider ran")
     const { getLatLong, getRoutePath, newRoute } = useContext(RouteContext)
     useEffect(() => {
 
@@ -25,7 +24,6 @@ export const PathsProvider2 = (props) => {
                     return Promise.all(arrayOfPromises)
                 })
                 .then(optionsArray => {
-                    console.log("optionsArray", optionsArray)
                     // optionsArray is an array of objects where each object contains an array of objects representing a potential street name
                     optionsArray.forEach(options => {
                         // Splices the origin and destination string into an array of strings

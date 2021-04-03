@@ -3,7 +3,6 @@
 export const getRouteStreetNames = (route, originString) => {
     // route.routes[0].sections[0].turnByTurnActions is an array of action objects like arrive, turn, continue
     const turnByTurnDirections = route.routes[0].sections[0].turnByTurnActions
-    console.log("directions", route.routes[0].sections[0])
 
     // Removes any action that doesn't contain a nextRoad value, because nextRoad conatins the street names that will be rendered
     // Removes things like depart, arrive, continue

@@ -44,7 +44,6 @@ export const TrafficProvider = (props) => {
             })
             // sets incidents equal to data that was returned from fetch call
             .then(res => {
-                console.log(res)
                 setIncidents(res)
             })
     }
