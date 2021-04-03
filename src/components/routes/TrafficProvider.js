@@ -36,7 +36,11 @@ export const TrafficProvider = (props) => {
         // console.log('fixedLatLongString: ', fixedLatLongString);
         latLongString = latLongString.replace(/\s+/g,'')
 
-        return fetch(`https://traffic.ls.hereapi.com/traffic/6.0/incidents.json?corridor=${latLongString}20&apiKey=${process.env.REACT_APP_API}`)
+        return fetch(`https://traffic.ls.hereapi.com/traffic/6.0/incidents.json?corridor=${latLongString}20&apiKey=${process.env.REACT_APP_API}`, {
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
             .then(res => {
                 if (res.ok) {
                     // Tells me I got a good res
