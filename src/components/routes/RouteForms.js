@@ -1,17 +1,14 @@
 // Reponsible for Route Form layout and state
 import React, { useContext, useState, useEffect } from "react"
-import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { userStorageKey } from "../auth/authSettings"
 import { RouteContext } from "./RouteProvider"
-import { TrafficContext } from "./TrafficProvider"
 import Form from 'react-bootstrap/Form';
-import FormGroup from 'react-bootstrap/Form';
 import { Card } from "react-bootstrap"
 import "./RouteForm.css"
 
 export const RouteForms = () => {
     // imports functions to be used in this component
-    const { addNewRoute, getRoutes, getRoutePath } = useContext(RouteContext)
+    const { addNewRoute, getRoutePath } = useContext(RouteContext)
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
@@ -73,7 +70,6 @@ export const RouteForms = () => {
         // if all input fields are filled
         if (isComplete) {
             getRoutePath(newRoute.origin, newRoute.destination)
-                
                 // sets visualPath state variable equal to array of street names to invoke re-render
                 .then(arrayOfStreetNames => setVisualPath(arrayOfStreetNames))
         }
@@ -91,7 +87,6 @@ export const RouteForms = () => {
                     <Form className="newRoute__forms--origin">
                         <legend>Origin</legend>
                         <fieldset>
-                            {/* <label htmlFor="originStreet"></label> */}
                             <Form.Control placeholder="Street" type="text" name="originStreet" value={options.originStreet} onChange={event => handleInputChange(event)} required></Form.Control>
                         </fieldset>
 
@@ -105,7 +100,6 @@ export const RouteForms = () => {
                     <Form className="newRoute__forms--destination">
                         <legend>Destination</legend>
                         <fieldset>
-                            {/* <label htmlFor="destinationStreet"></label> */}
                             <Form.Control placeholder="Street" type="text" name="destinationStreet" value={options.destinationStreet} onChange={event => handleInputChange(event)} required></Form.Control>
                         </fieldset>
 

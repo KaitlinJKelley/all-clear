@@ -22,7 +22,6 @@ export const RoutePage = () => {
     }, [])
 
     useEffect(() => {
-        // debugger
         const currentUserId = parseInt(sessionStorage.getItem(userStorageKey))
         // filters the array containing all route objects and return and array containing only the objects for the currently logged in user
         const filteredRoutes = routes.filter(route => route.userId === currentUserId)

@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react"
 import { getRouteStreetNames } from "../../modules/RouteStreetNames"
-import { PathsProvider } from "../paths/PathsProvider"
 import { PathsProvider2 } from "../paths/PathsProvider2"
 
 export const RouteContext = createContext()

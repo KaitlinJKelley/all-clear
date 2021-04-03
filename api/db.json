@@ -287,6 +287,168 @@
       "routeId": 7,
       "order": 7,
       "id": 67
+    },
+    {
+      "latLong": "30.59752, -88.13688",
+      "routeId": 8,
+      "order": 1,
+      "id": 68
+    },
+    {
+      "latLong": "30.59293, -88.13547",
+      "routeId": 8,
+      "order": 2,
+      "id": 69
+    },
+    {
+      "latLong": "30.5972, -88.16134",
+      "routeId": 8,
+      "order": 3,
+      "id": 70
+    },
+    {
+      "latLong": "30.59752, -88.13688",
+      "routeId": 8,
+      "order": 1,
+      "id": 71
+    },
+    {
+      "latLong": "30.69083, -88.02223",
+      "routeId": 8,
+      "order": 4,
+      "id": 72
+    },
+    {
+      "latLong": "30.59293, -88.13547",
+      "routeId": 8,
+      "order": 2,
+      "id": 73
+    },
+    {
+      "latLong": "30.68866, -88.04559",
+      "routeId": 8,
+      "order": 5,
+      "id": 74
+    },
+    {
+      "latLong": "30.5972, -88.16134",
+      "routeId": 8,
+      "order": 3,
+      "id": 75
+    },
+    {
+      "latLong": "30.67276, -88.05086",
+      "routeId": 8,
+      "order": 6,
+      "id": 76
+    },
+    {
+      "latLong": "30.69083, -88.02223",
+      "routeId": 8,
+      "order": 4,
+      "id": 77
+    },
+    {
+      "latLong": "30.69011, -88.04229",
+      "routeId": 8,
+      "order": 7,
+      "id": 78
+    },
+    {
+      "latLong": "30.68866, -88.04559",
+      "routeId": 8,
+      "order": 5,
+      "id": 79
+    },
+    {
+      "latLong": "30.67666, -88.04866",
+      "routeId": 8,
+      "order": 8,
+      "id": 80
+    },
+    {
+      "latLong": "30.67276, -88.05086",
+      "routeId": 8,
+      "order": 6,
+      "id": 81
+    },
+    {
+      "latLong": "30.69007, -88.04129",
+      "routeId": 8,
+      "order": 9,
+      "id": 82
+    },
+    {
+      "latLong": "30.69011, -88.04229",
+      "routeId": 8,
+      "order": 7,
+      "id": 83
+    },
+    {
+      "latLong": "30.67666, -88.04866",
+      "routeId": 8,
+      "order": 8,
+      "id": 84
+    },
+    {
+      "latLong": "30.69007, -88.04129",
+      "routeId": 8,
+      "order": 9,
+      "id": 85
+    },
+    {
+      "latLong": "30.59752, -88.13688",
+      "routeId": 8,
+      "order": 1,
+      "id": 86
+    },
+    {
+      "latLong": "30.59293, -88.13547",
+      "routeId": 8,
+      "order": 2,
+      "id": 87
+    },
+    {
+      "latLong": "30.5972, -88.16134",
+      "routeId": 8,
+      "order": 3,
+      "id": 88
+    },
+    {
+      "latLong": "30.69083, -88.02223",
+      "routeId": 8,
+      "order": 4,
+      "id": 89
+    },
+    {
+      "latLong": "30.68866, -88.04559",
+      "routeId": 8,
+      "order": 5,
+      "id": 90
+    },
+    {
+      "latLong": "30.67276, -88.05086",
+      "routeId": 8,
+      "order": 6,
+      "id": 91
+    },
+    {
+      "latLong": "30.69011, -88.04229",
+      "routeId": 8,
+      "order": 7,
+      "id": 92
+    },
+    {
+      "latLong": "30.67666, -88.04866",
+      "routeId": 8,
+      "order": 8,
+      "id": 93
+    },
+    {
+      "latLong": "30.69007, -88.04129",
+      "routeId": 8,
+      "order": 9,
+      "id": 94
     }
   ]
 }
