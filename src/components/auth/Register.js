@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { authApi, userStorageKey } from "./authSettings"
-import "./Login.css"
 
 export const Register = () => {
 

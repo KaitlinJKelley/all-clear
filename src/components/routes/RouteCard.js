@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react"
-import { getRouteStreetNames } from "../../modules/RouteStreetNames"
 import { RouteContext } from "./RouteProvider"
 import { TrafficContext } from "./TrafficProvider"
 import Button from 'react-bootstrap/Button';
@@ -126,9 +125,7 @@ export const RouteCard = ({ routeObj }) => {
                         <input id={"name"} type="text" value={routeToEdit.name} onChange={event => handleChangeInput(event)}></input>
                         <div className="legends"><legend>Origin</legend><legend>Destination</legend></div>
                         <div className="addressEditFields">
-                            {/* <legend>Origin</legend> */}
                             <textarea id={"origin"} type="text" value={routeToEdit.origin} onChange={event => handleChangeInput(event)}></textarea>
-                            {/* <legend>Destination</legend> */}
                             <textarea id={"destination"} type="text" value={routeToEdit.destination} onChange={event => handleChangeInput(event)}></textarea>
                         </div>
                     </div>
@@ -141,7 +138,6 @@ export const RouteCard = ({ routeObj }) => {
                 // IF FALSE, just display the route name as a header
                 : <Card.Title>{routeObj.name}</Card.Title>}
 
-            {/* Check Traffic Button */}
             {editClicked ? "" :
                 <>
                     {messageToPost}
