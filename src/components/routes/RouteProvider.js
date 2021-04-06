@@ -34,7 +34,7 @@ export const RouteProvider = (props) => {
         .then(res => res.json())
         .then(setNewRoute)
         .then(getRoutes)
-        .then(() => <PathsProvider2 />)
+        // .then(() => <PathsProvider2 />)
 
     }
     //set routes state variable equal to an array of all routes 

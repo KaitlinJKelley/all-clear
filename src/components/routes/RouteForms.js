@@ -55,6 +55,11 @@ export const RouteForms = () => {
         setVisualPath([])
         setIsComplete(false)
     }
+    let style={backgroundColor: "yellow"} 
+    const handleSelectionReset = () => {
+        debugger
+        style = {backgroundColor: "blue"}
+    }
 
     useEffect(() => {
         const currentUserId = parseInt(sessionStorage.getItem(userStorageKey))
@@ -112,10 +117,10 @@ export const RouteForms = () => {
                     </Form>
                 </div>
             </div>
-            <div className="newRoute__path">
+            <div className="newRoute__path" onClick={() => handleSelectionReset()}>
                 <Card.Title>Your Route Path</Card.Title>
-                {visualPath.map(path => Array.isArray(path) ? <PathCard key={visualPath[visualPath.indexOf(path)]} pathArray={path}/> : path)}
-                {/* {console.log("visual path",visualPath.map(path => path.length))} */}
+                {visualPath.map(path => Array.isArray(path) ? <PathCard key={visualPath.indexOf(path)} pathArray={path} pathId={visualPath.indexOf(path)} style={style}/> : path)}
+                {/* {console.log("visual path",visualPath.map(path => visualPath.indexOf(path)))} */}
             </div>
             <button className="btn--saveRoute" type="submit"
                 // Button is disabled until isComplete equals true

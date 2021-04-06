@@ -15,7 +15,8 @@ export const PathsProvider2 = (props) => {
             let origin = newRoute.origin
             let destination = newRoute.destination
             getRoutePath(newRoute.origin, newRoute.destination)
-                .then(arrayOfStreetNames => {
+                .then(
+                    arrayOfStreetNames => {
                     arrayOfPromises = arrayOfStreetNames.map(streetName => {
                         // Runs each street name string through the geocoder API to get the lat/long
                         return getLatLong(streetName)
