@@ -19,7 +19,7 @@ export const RouteProvider = (props) => {
     // HERE Router API creates path from origin to destination
     // Uses string interpolation to insert the values (lat/long) of the origin and destination objects
     const getDirections = (originObj, destinationObj) => {
-        return fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${Object.values(originObj)}&destination=${Object.values(destinationObj)}&return=polyline,turnbyturnactions&apikey=${process.env.REACT_APP_API}`)
+        return fetch(`https://router.hereapi.com/v8/routes?transportMode=car&alternatives=5&origin=${Object.values(originObj)}&destination=${Object.values(destinationObj)}&return=polyline,turnbyturnactions&apikey=${process.env.REACT_APP_API}`)
             .then(res => res.json())
     }
 
@@ -84,7 +84,9 @@ export const RouteProvider = (props) => {
             // Returns turn by turn directions from origin to destination
             .then(() => getDirections(originLatLong, destinationLatLong))
             // Returns an array of strings, where wach string is the next street a user should take 
-            .then(directions => getRouteStreetNames(directions, origin))
+            .then(arrayOfDirections => {
+                return arrayOfDirections.routes.map(directions => getRouteStreetNames(directions, origin))
+            })
     }
 
     return (

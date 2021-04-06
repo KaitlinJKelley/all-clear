@@ -5,6 +5,7 @@ import { RouteContext } from "./RouteProvider"
 import Form from 'react-bootstrap/Form';
 import { Card } from "react-bootstrap"
 import "./RouteForm.css"
+import { PathCard } from "../paths/PathCard";
 
 export const RouteForms = () => {
     // imports functions to be used in this component
@@ -113,7 +114,8 @@ export const RouteForms = () => {
             </div>
             <div className="newRoute__path">
                 <Card.Title>Your Route Path</Card.Title>
-                {visualPath.join(" to ")}
+                {visualPath.map(path => Array.isArray(path) ? <PathCard key={visualPath[visualPath.indexOf(path)]} pathArray={path}/> : path)}
+                {/* {console.log("visual path",visualPath.map(path => path.length))} */}
             </div>
             <button className="btn--saveRoute" type="submit"
                 // Button is disabled until isComplete equals true
