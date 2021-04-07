@@ -6,6 +6,7 @@ export const PathsContext = createContext()
 export const PathsProvider2 = (props) => {
     const { getLatLong, getRoutePath, newRoute } = useContext(RouteContext)
     const [selectedPath, setSelectedPath] = useState([])
+    console.log("selectedPath in provider",selectedPath)
     useEffect(() => {
 
         if (newRoute.origin) {

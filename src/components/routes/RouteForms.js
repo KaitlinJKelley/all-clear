@@ -12,7 +12,7 @@ export const RouteForms = () => {
     // imports functions to be used in this component
     const { addNewRoute, getRoutePath } = useContext(RouteContext)
 
-    const {selectedPath} = useContext(PathsContext)
+    const { selectedPath } = useContext(PathsContext)
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
@@ -124,8 +124,9 @@ export const RouteForms = () => {
                 <Card.Title>Your Route Path</Card.Title>
                 {visualPath.map(path => {
                     // {path === selectedPath ? console.log("matched", selectedPath) : console.log("not matched", selectedPath)}
-                    return Array.isArray(path) ? <PathCard key={visualPath.indexOf(path)} pathArray={path} pathId={visualPath.indexOf(path)} style={selectedPath === path ? {backgroundColor: "green"} : {backgroundColor: "white"}}/> : path
-                    })}
+                    { path === selectedPath ? console.log("matched") : console.log("not mathced", "selectedPath: ",selectedPath, "path: ", path, visualPath.indexOf(path)) }
+                    return Array.isArray(path) ? <PathCard key={visualPath.indexOf(path)} pathArray={path} pathId={visualPath.indexOf(path)} style={selectedPath === path ? { backgroundColor: "green" } : { backgroundColor: "white" }} /> : path
+                })}
                 {/* {console.log("visual path",visualPath.map(path => visualPath.indexOf(path)))} */}
             </div>
             <button className="btn--saveRoute" type="submit"
