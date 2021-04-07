@@ -6,10 +6,13 @@ import Form from 'react-bootstrap/Form';
 import { Card } from "react-bootstrap"
 import "./RouteForm.css"
 import { PathCard } from "../paths/PathCard";
+import { PathsContext } from "../paths/PathsProvider2";
 
 export const RouteForms = () => {
     // imports functions to be used in this component
     const { addNewRoute, getRoutePath } = useContext(RouteContext)
+
+    const {selectedPath} = useContext(PathsContext)
     // Will be used to determine if all form fields are filled
     const [isComplete, setIsComplete] = useState(false)
     // Will be used to cause re-render when array of street names is ready to be displayed on DOM
@@ -55,16 +58,16 @@ export const RouteForms = () => {
         setVisualPath([])
         setIsComplete(false)
     }
-    let style={backgroundColor: "yellow"} 
-    const handleSelectionReset = () => {
-        debugger
-        style = {backgroundColor: "blue"}
-    }
+    // let style={backgroundColor: "yellow"} 
+    // const handleSelectionReset = () => {
+    //     debugger
+    //     style = {backgroundColor: "blue"}
+    // }
 
     useEffect(() => {
         const currentUserId = parseInt(sessionStorage.getItem(userStorageKey))
         // Every time setOptions is called to change the options object's value
-        // Decalre a newRoute variable that mirrors route variable layout with concatenated values
+        // Declare a newRoute variable that mirrors route variable layout with concatenated values
         const newRoute = {
             name: options.name,
             origin: options.originStreet + " " + options.originCSZ,
@@ -80,7 +83,7 @@ export const RouteForms = () => {
                 .then(arrayOfStreetNames => setVisualPath(arrayOfStreetNames))
         }
 
-    }, [options])
+    }, [options, selectedPath])
 
     return (
         <>
@@ -117,9 +120,12 @@ export const RouteForms = () => {
                     </Form>
                 </div>
             </div>
-            <div className="newRoute__path" onClick={() => handleSelectionReset()}>
+            <div className="newRoute__path">
                 <Card.Title>Your Route Path</Card.Title>
-                {visualPath.map(path => Array.isArray(path) ? <PathCard key={visualPath.indexOf(path)} pathArray={path} pathId={visualPath.indexOf(path)} style={style}/> : path)}
+                {visualPath.map(path => {
+                    // {path === selectedPath ? console.log("matched", selectedPath) : console.log("not matched", selectedPath)}
+                    return Array.isArray(path) ? <PathCard key={visualPath.indexOf(path)} pathArray={path} pathId={visualPath.indexOf(path)} style={selectedPath === path ? {backgroundColor: "green"} : {backgroundColor: "white"}}/> : path
+                    })}
                 {/* {console.log("visual path",visualPath.map(path => visualPath.indexOf(path)))} */}
             </div>
             <button className="btn--saveRoute" type="submit"

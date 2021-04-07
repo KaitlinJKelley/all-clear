@@ -26,11 +26,9 @@ export const getRouteStreetNames = (route, originString) => {
 
             finalSpecificStreetNames.push(name + " " + originState)
         })
-        console.log('finalSpecificStreetNames: ', finalSpecificStreetNames);
         return finalSpecificStreetNames
 
     } else {
-        console.log('finalStreetNamesWithoutDuplicates: ', finalStreetNamesWithoutDuplicates);
         return finalStreetNamesWithoutDuplicates
     }
     

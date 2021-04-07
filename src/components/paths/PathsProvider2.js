@@ -1,10 +1,11 @@
-import React, { createContext, useContext, useEffect } from "react"
+import React, { createContext, useContext, useEffect, useState } from "react"
 import { RouteContext } from "../routes/RouteProvider"
 
 export const PathsContext = createContext()
 
 export const PathsProvider2 = (props) => {
     const { getLatLong, getRoutePath, newRoute } = useContext(RouteContext)
+    const [selectedPath, setSelectedPath] = useState([])
     useEffect(() => {
 
         if (newRoute.origin) {
@@ -109,7 +110,7 @@ export const PathsProvider2 = (props) => {
 
     return (
         <PathsContext.Provider value={{
-            getPathByRouteId
+            getPathByRouteId, selectedPath, setSelectedPath
         }}>
             {props.children}
         </PathsContext.Provider>

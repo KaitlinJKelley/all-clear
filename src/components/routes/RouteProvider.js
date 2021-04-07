@@ -5,6 +5,7 @@ import { PathsProvider2 } from "../paths/PathsProvider2"
 export const RouteContext = createContext()
 
 export const RouteProvider = (props) => {
+    
     const [routes, setRoutes] = useState([])
 
     const [newRoute, setNewRoute] = useState({})
@@ -92,6 +93,7 @@ export const RouteProvider = (props) => {
     return (
         <RouteContext.Provider value={{
             getLatLong, getDirections, addNewRoute, getRoutes, routes, getRouteById, deleteRoute, updateRoute, getRoutePath, newRoute
+            // selectedPath, setSelectedPath
 
         }}>
             {props.children}
