@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { PathsContext } from "./PathsProvider2"
+import "./PathCard.css"
 
 export const PathCard = ({ pathArray, pathId, style }) => {
     const { PathsProvider2, setSelectedPath } = useContext(PathsContext)
