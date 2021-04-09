@@ -39,7 +39,7 @@ export const RouteProvider = (props) => {
     }
     //set routes state variable equal to an array of all routes 
     const getRoutes = () => {
-        return fetch("http://localhost:8088/routes")
+        return fetch("https://kaitlinjkelley.github.io/data/open_data.geojson/routes")
             .then(res => res.json())
             .then(routesArray => setRoutes(routesArray))
     }
